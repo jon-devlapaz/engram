@@ -237,7 +237,7 @@ for source transparency.
 
 ---
 
-> Distilled with **Engram**,
+> Distilled with [Engram](https://github.com/jon-devlapaz/engram),
 > an English process fork of [Nuwa](https://github.com/alchaincyf/nuwa-skill).
 > Not the person.
 ```
