@@ -1,5 +1,5 @@
 ---
-name: engram-v2
+name: engram
 description: >
   Triggers: engram, distill [person]. Mind-first thinking advisor via
   six-agent research, triple-verified models, expression DNA, dual-agent
@@ -7,7 +7,7 @@ description: >
   Ordinary how-would-X → perspective skills.
 ---
 
-# Engram (v2)
+# Engram
 
 Read `CONSTITUTION.md` first. If a step would violate it, stop.
 
@@ -30,7 +30,6 @@ Nuwa (pipeline parity); Nuwa itself stays read-only.
 | 2 | `references/extraction-framework.md` | Triple verification, DNA, contradictions |
 | 3 | `references/skill-template.md` | Runtime skeleton (parity with Nuwa) |
 | 3 | `references/agentic-protocol.md` | Derive Step-2 tracks; calibration; Step-3 packaging |
-| 3 | `references/FIDELITY-GAPS.md` | Lean ≠ delete Step-3 / Evidence classes |
 | 4 | `scripts/quality_check.py` then `references/fidelity-scorecard.md` | Mechanical QA + independent scorecard |
 | 8 / opt-in | `references/optional-immersion.md` | Immersion / CTT only when asked |
 | before run | `references/version-self-check.md` | Silent 30-day update check (I4 non-git skip) |

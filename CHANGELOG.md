@@ -1,5 +1,13 @@
 # Changelog — engram-v2
 
+## [2.5.1] — pure skill surface (2026-09-04)
+
+Removed non-northstar weight from the skill pack: `docs/audit/`, `ROADMAP.md`,
+`parity-checklist.md` (archived outside the skill). Skill frontmatter name
+`engram`. No distill-procedure change.
+
+---
+
 ## [2.5.0] — publish prep (2026-09-04)
 
 Packaging only: LICENSE (MIT), public README, VERSION semver, `.gitignore`,
