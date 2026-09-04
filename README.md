@@ -4,8 +4,14 @@
 
 | | |
 |---|---|
-| **Version** | 2.7.5 |
+| **Version** | 2.7.6 |
 | **License** | MIT (`LICENSE`) |
+
+## Happy path
+
+User says `distill <name>`; agent owns scripts. User consents only for
+host installs and checkpoints 1.5/2.5 (`approve | revise | stop`).
+See `references/happy-path.md`.
 
 ## Install
 
@@ -21,8 +27,8 @@ Place this tree where your agent loads skills (example: `<skills-root>/engram/`)
 python3 scripts/engram_doctor.py --engram path/to/engrams/<slug>
 python3 scripts/phase1_gate.py --engram path/to/engrams/<slug>
 python3 scripts/ax_gate.py --engram path/to/engrams/<slug>
-python3 scripts/merge_research.py path/to/engrams/<slug>
-python3 scripts/quality_check.py path/to/engrams/<slug>/SKILL.md
+python3 scripts/merge_research.py --engram path/to/engrams/<slug>
+python3 scripts/quality_check.py --engram path/to/engrams/<slug>
 ```
 
 ## Nested helpers (Phase 1)

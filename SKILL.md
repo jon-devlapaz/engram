@@ -26,6 +26,7 @@ Memory is additive and admission-gated.
 | 1 / scenarios | `references/special-scenarios.md` | Living/historical, China allowlist, obscure, self-distill |
 | 1 / tools | `references/info-gathering-skills.md` + `helpers/*/SKILL.md` | Nested Phase-1 helper skills (shipped in-tree) |
 | before 1 / gate | `scripts/phase1_gate.py` (+ doctor / `helpers/doctor/SKILL.md`) | Spawn gate: doctor blockers + url-cache; wizards on WARN/FAIL |
+| 0 / 0.5 | `references/happy-path.md` | Agentic bootstrap: agent owns scripts; user consents host installs + 1.5/2.5 |
 | 0.5 / AX | `references/ax-ops.md` + `scripts/ax_gate.py` | STATUS.md, AX beats, hard checkpoint verbs, machine-down |
 | 1.5 | `scripts/merge_research.py` | Empirical review table |
 | 2 | `references/extraction-framework.md` | Triple verification, DNA, contradictions |
@@ -67,6 +68,9 @@ Checkpoint widget/options must be exactly **approve | revise | stop**
 is not approve unless the user names the phase.
 
 ## Phase 0 — Eligibility and clarifying
+
+Bootstrap contract: `references/happy-path.md` (distill `<name>` → agent
+owns scripts; user consents host installs + 1.5/2.5 only).
 
 Phase 0 entry:
 
@@ -133,8 +137,12 @@ follow that procedure (demand table → person vs topic → ≤3 candidates).
 
 ## Phase 0.5 — Create the directory before research
 
+Happy-path bootstrap: read `references/happy-path.md` (agent owns
+scripts; user consents only for host installs and checkpoints 1.5/2.5).
+
 Read `references/schema.md` and create that tree **before** any agent
-runs. Copy this skill's `CONSTITUTION.md` in. Every subagent writes its
+runs. Copy this skill's `CONSTITUTION.md` in. Create `STATUS.md` with
+`phase: 0.5` and `mkdir sources/url-cache`. Every subagent writes its
 ledger inside the engram folder. Research that is not a file did not
 happen. The folder must be self-contained.
 
@@ -164,14 +172,15 @@ happen. The folder must be self-contained.
       (relative to this Engram pack). Record absolute pack path as
       `ENGRAM_PACK=` for spawn prompts.
 - [ ] Create `<engram>/sources/url-cache/` (shared fetch-once across agents).
-- [ ] Preflight: run `python3 scripts/phase1_gate.py --engram <dir>`
-      (optional `--mkdir-cache`). Gate runs doctor and requires
-      `sources/url-cache/`; **exit non-zero if `blocker_fails > 0` or
-      cache missing — do not spawn Phase 1.** Doctor alone:
-      `python3 scripts/engram_doctor.py` (and `--json` if scripting).
-      Open `helpers/doctor/SKILL.md` and clear blockers first. Optional
-      warns may proceed only with **labeled gaps** in run notes (e.g.
-      agent-reach CLI missing → Jina/yt-dlp fallback).
+- [ ] Preflight: run `python3 scripts/engram_doctor.py --engram <dir>`
+      then `python3 scripts/phase1_gate.py --engram <dir> --mkdir-cache`.
+      Gate exits non-zero if `blocker_fails > 0` or url-cache **directory**
+      missing — do not spawn Phase 1. True blockers: `python3`, missing
+      helper/script files. **yt-dlp is optional WARN** — label YT path as
+      gap if missing (not a spawn blocker). If blockers: ONE consent —
+      install / proceed labeled gaps / stop. Never silent brew/pipx.
+      Optional WARNs: default proceed with labeled gaps unless user asked
+      max-fidelity bootstrap. Wizards: `helpers/doctor/SKILL.md`.
 - [ ] Read `references/info-gathering-skills.md` once; you will paste the
       **Helper block** into every Phase 1 agent prompt (mandatory).
 - [ ] **I1 enrichment (optional):** if quote density matters and the
@@ -183,11 +192,10 @@ happen. The folder must be self-contained.
       `references/ax-ops.md`.
 - [ ] Create `sources/INDEX.md` (primary / secondary / stub). Quarantine
       CAPTCHA stubs to `sources/stubs/` (never leave under `articles/`).
-- [ ] AX quality: `python3 scripts/ax_gate.py` (pack) then, once the
-      engram tree exists, `python3 scripts/ax_gate.py --engram <dir>`.
-      Exit non-zero on FAIL — fix before calling the run healthy.
-      Doctor with engram: `python3 scripts/engram_doctor.py --engram <dir>`
-      (url-cache PASS when nonempty).
+- [ ] AX quality: `python3 scripts/ax_gate.py` (pack) then
+      `python3 scripts/ax_gate.py --engram <dir>`. At phase 0.5 empty
+      `url-cache/` is WARN (empty OK), not FAIL. Exit non-zero on FAIL —
+      fix before calling the run healthy.
 
 ## Phase 1 — Six-agent corpus
 
@@ -399,7 +407,7 @@ sources. Full blacklist + Chinese outlet allowlist:
 | Agent conflict | Keep it | Unresolved tensions |
 | Duplicate URL / re-deep-research | Reuse `url-cache/` + spine note | Re-spawn only the thin ledger |
 | Doctor blocker_fails > 0 | Walk wizards; re-doctor | Do not spawn |
-| Machine-down (ListMachines empty / Shell unavailable) | Show machine-down card (`references/ax-ops.md`); reconnect host | Resume from `STATUS.md` phase — do not re-spawn Phase 1 blindly |
+| Machine-down (host session disconnected / Shell unavailable) | Show machine-down card (`references/ax-ops.md`); reconnect host machine/session; message user in chat | Resume from `STATUS.md` phase — do not re-spawn Phase 1 blindly |
 
 Prefer a labeled 60 to a fabricated 90.
 

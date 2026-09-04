@@ -28,7 +28,7 @@ def _load_doctor():
 def main(argv: list[str] | None = None) -> int:
     try:
         parser = argparse.ArgumentParser(
-            description="Engram Phase 1 gate (doctor + url-cache)"
+            description="Engram Phase 1 gate (doctor blockers + url-cache; yt-dlp is optional)"
         )
         parser.add_argument(
             "--engram",

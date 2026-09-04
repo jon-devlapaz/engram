@@ -39,7 +39,11 @@ def _which(name: str) -> str | None:
 
 
 def _can_import(mod: str) -> bool:
-    return importlib.util.find_spec(mod) is not None
+    """True if importable. Never crash on dotted/partial packages (e.g. google.genai)."""
+    try:
+        return importlib.util.find_spec(mod) is not None
+    except (ModuleNotFoundError, ValueError, AttributeError):
+        return False
 
 
 def check(
@@ -148,7 +152,7 @@ def run_checks(pack: Path, engram: Path | None = None) -> list[dict[str, Any]]:
             )
         )
 
-    # --- yt-dlp (blocker) ---
+    # --- yt-dlp (optional warn; YT path labels gap if missing) ---
     ytdlp = _which("yt-dlp")
     if ytdlp:
         checks.append(
@@ -156,7 +160,7 @@ def run_checks(pack: Path, engram: Path | None = None) -> list[dict[str, Any]]:
                 id="cli-yt-dlp",
                 title="CLI yt-dlp",
                 status="pass",
-                severity="blocker",
+                severity="optional",
                 detail=ytdlp,
                 wizard=None,
             )
@@ -166,9 +170,12 @@ def run_checks(pack: Path, engram: Path | None = None) -> list[dict[str, Any]]:
             check(
                 id="cli-yt-dlp",
                 title="CLI yt-dlp",
-                status="fail",
-                severity="blocker",
-                detail="yt-dlp not on PATH — YouTube captions / discover will fail",
+                status="warn",
+                severity="optional",
+                detail=(
+                    "yt-dlp not on PATH — label YouTube caption/discover path as gap; "
+                    "not a Phase-1 spawn blocker"
+                ),
                 wizard="install-ytdlp",
             )
         )

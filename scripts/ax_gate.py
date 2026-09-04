@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Engram AX quality gate suite (hill-climb 2.7.5).
+"""Engram AX quality gate suite (hill-climb 2.7.6).
 
 Exit codes:
   0  all checks PASS (warns allowed)
@@ -136,14 +136,14 @@ def check_pack(pack: Path) -> list[dict[str, Any]]:
             )
         )
 
-    # D. machine-down / reconnect card language
+    # D. machine-down / host-session reconnect language (host-neutral)
     if skill.is_file():
         has_md = bool(
             re.search(r"machine[- ]down", skill_text, re.IGNORECASE)
         )
         has_reconnect = bool(
             re.search(
-                r"reconnect|ListMachines|Shell unavailable",
+                r"reconnect|ListMachines|host session|user chat|Shell unavailable",
                 skill_text,
                 re.IGNORECASE,
             )
@@ -154,7 +154,10 @@ def check_pack(pack: Path) -> list[dict[str, Any]]:
                 id="D",
                 title="SKILL machine-down / reconnect language",
                 status="pass" if ok else "fail",
-                detail=f"machine-down={has_md} reconnect/ListMachines={has_reconnect}",
+                detail=(
+                    f"machine-down={has_md} "
+                    f"reconnect/host-session={has_reconnect}"
+                ),
             )
         )
     else:
@@ -298,10 +301,58 @@ def check_engram(engram: Path) -> list[dict[str, Any]]:
             )
         )
 
-    # I. url-cache nonempty
+    # I. url-cache — FAIL missing dir; empty OK/WARN at 0.5; FAIL empty post-gather
     cache = engram / "sources" / "url-cache"
     md = sorted(cache.glob("*.md")) if cache.is_dir() else []
-    if md:
+    phase_val = ""
+    status_path = engram / "STATUS.md"
+    if status_path.is_file():
+        st = _read(status_path)
+        if not st.startswith("__READ_ERROR__"):
+            m = re.search(
+                r"(?:^|\n)\s*[-*]?\s*phase\s*:\s*(.+)$",
+                st,
+                re.IGNORECASE | re.MULTILINE,
+            )
+            if m:
+                phase_val = m.group(1).strip()
+            else:
+                m2 = re.search(
+                    r"^#+\s*phase\b\s*(.*)$",
+                    st,
+                    re.IGNORECASE | re.MULTILINE,
+                )
+                if m2:
+                    phase_val = m2.group(1).strip()
+    # Post-gather if phase value mentions 1.5 / Phase 2+ / G* milestones
+    post_gather = bool(
+        re.search(
+            r"(?:1\.5|\b2\.5\b|\bPhase\s*[1234]\b|\b[234]\b|\bG\d*\b|post-gather|G7|G8)",
+            phase_val,
+            re.IGNORECASE,
+        )
+    )
+    # Explicit early phases win over loose digit matches
+    if re.search(r"^(?:0(?:\.5)?|pre-phase-1|pre-research)\b", phase_val, re.IGNORECASE):
+        post_gather = False
+    pre_or_unset = (not phase_val) or bool(
+        re.search(
+            r"^(?:0(?:\.5)?|pre-phase-1|pre-research)\b",
+            phase_val,
+            re.IGNORECASE,
+        )
+    )
+
+    if not cache.is_dir():
+        rows.append(
+            _row(
+                id="I",
+                title="sources/url-cache present",
+                status="fail",
+                detail=f"missing directory: {cache}",
+            )
+        )
+    elif md:
         rows.append(
             _row(
                 id="I",
@@ -310,13 +361,22 @@ def check_engram(engram: Path) -> list[dict[str, Any]]:
                 detail=f"{len(md)} *.md",
             )
         )
-    else:
+    elif post_gather and not pre_or_unset:
         rows.append(
             _row(
                 id="I",
                 title="sources/url-cache nonempty",
                 status="fail",
-                detail=f"missing or empty: {cache}",
+                detail=f"empty after Phase 1.5+/post-gather (phase={phase_val!r}): {cache}",
+            )
+        )
+    else:
+        rows.append(
+            _row(
+                id="I",
+                title="sources/url-cache nonempty",
+                status="warn",
+                detail="empty OK at 0.5 / pre-research (dir exists)",
             )
         )
 
@@ -378,7 +438,7 @@ def resolve_pack(explicit: str | None) -> Path:
 def main(argv: list[str] | None = None) -> int:
     try:
         parser = argparse.ArgumentParser(
-            description="Engram AX quality gate (2.7.5)"
+            description="Engram AX quality gate (2.7.6)"
         )
         parser.add_argument(
             "--pack",

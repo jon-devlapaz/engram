@@ -12,7 +12,7 @@ Analyzes videos using Google's Gemini API with support for:
 
 API Key Configuration:
 1. Process environment: $GEMINI_API_KEY
-2. Skill directory: .claude/skills/gemini-video-understanding/.env
+2. Skill directory: helpers/gemini-video/.env
 3. Project root: .env
 """
 
@@ -150,7 +150,7 @@ def analyze_video(
         raise ValueError(
             "GEMINI_API_KEY not found. Set it in:\n"
             "1. Environment: export GEMINI_API_KEY=your-key\n"
-            "2. Skill directory: .claude/skills/gemini-video-understanding/.env\n"
+            "2. Skill directory: helpers/gemini-video/.env\n"
             "3. Project root: .env file\n\n"
             "Get your API key at: https://aistudio.google.com/apikey"
         )

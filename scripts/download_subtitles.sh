@@ -12,21 +12,37 @@ if [ -z "$URL" ]; then
     exit 1
 fi
 mkdir -p "$OUTPUT_DIR"
+ERRLOG=$(mktemp)
+trap 'rm -f "$ERRLOG"' EXIT
+
+run_ytdlp() {
+    # Capture stderr to ERRLOG; on failure echo it so agents see why.
+    if yt-dlp "$@" 2>"$ERRLOG"; then
+        return 0
+    fi
+    echo "yt-dlp failed:" >&2
+    cat "$ERRLOG" >&2
+    return 1
+}
+
 echo ">>> listing subs..."
-yt-dlp --list-subs --no-download "$URL" 2>/dev/null | tail -20
+yt-dlp --list-subs --no-download "$URL" 2>"$ERRLOG" | tail -20 || {
+    echo "yt-dlp --list-subs failed:" >&2
+    cat "$ERRLOG" >&2
+}
 echo ">>> trying manual English..."
-if yt-dlp --write-subs --sub-langs "en,en-US,en-GB" --sub-format srt --skip-download -o "$OUTPUT_DIR/%(title)s" "$URL" 2>/dev/null; then
+if run_ytdlp --write-subs --sub-langs "en,en-US,en-GB" --sub-format srt --skip-download -o "$OUTPUT_DIR/%(title)s" "$URL"; then
     FOUND=$(find "$OUTPUT_DIR" -name "*.srt" -mmin -1 2>/dev/null | head -1)
     if [ -n "$FOUND" ]; then echo "ok: $FOUND"; exit 0; fi
 fi
 echo ">>> trying manual Chinese..."
-if yt-dlp --write-subs --sub-langs "zh-Hans,zh-Hant,zh,zh-CN,zh-TW" --sub-format srt --skip-download -o "$OUTPUT_DIR/%(title)s" "$URL" 2>/dev/null; then
+if run_ytdlp --write-subs --sub-langs "zh-Hans,zh-Hant,zh,zh-CN,zh-TW" --sub-format srt --skip-download -o "$OUTPUT_DIR/%(title)s" "$URL"; then
     FOUND=$(find "$OUTPUT_DIR" -name "*.srt" -mmin -1 2>/dev/null | head -1)
     if [ -n "$FOUND" ]; then echo "ok: $FOUND"; exit 0; fi
 fi
 echo ">>> trying auto subs..."
-if yt-dlp --write-auto-subs --sub-langs "en,zh-Hans,zh" --sub-format srt --skip-download -o "$OUTPUT_DIR/%(title)s" "$URL" 2>/dev/null; then
-    FOUND=$(find "$OUTPUT_DIR" \( -name "*.srt" -o -name "*.vtt" \) | head -1)
+if run_ytdlp --write-auto-subs --sub-langs "en,zh-Hans,zh" --sub-format srt --skip-download -o "$OUTPUT_DIR/%(title)s" "$URL"; then
+    FOUND=$(find "$OUTPUT_DIR" \( -name "*.srt" -o -name "*.vtt" \) -mmin -1 2>/dev/null | head -1)
     if [ -n "$FOUND" ]; then echo "ok auto: $FOUND"; exit 0; fi
 fi
 echo "no usable captions"

@@ -64,16 +64,16 @@ python`, pyenv, or the OS package). Re-doctor.
 
 ### install-ytdlp
 
-**When:** `cli-yt-dlp` fail (blocker).
+**When:** `cli-yt-dlp` warn (optional — not a Phase-1 spawn blocker).
 
-**Do:**
+**Do:** (only with user host-install consent)
 ```bash
 brew install yt-dlp
 # or: pipx install yt-dlp
 which yt-dlp
 ```
-Never spawn caption/discover agents that assume yt-dlp without this check.
-Re-doctor.
+If declining install: **label the YouTube caption/discover path as a gap**
+in run notes and proceed. Never silent brew/pipx. Re-doctor after install.
 
 ### install-ffmpeg
 
@@ -159,7 +159,7 @@ This is a process wizard, not a host package install.
 
 ## Anti-patterns (do not)
 
-- **Spawn with missing yt-dlp** after a blocker fail — fix or halt that path.
+- **Spawn assuming yt-dlp** when it is missing — label YT path as gap or install with consent.
 - **Spawn while doctor `blocker_fails > 0`** — clear blockers first.
 - **Six-way parallel deep-research on the same spine** — spine-first + url-cache.
 - **Silent degrade** — always log helper failure; label ledger gaps.

@@ -8,8 +8,8 @@ six-agent pass is interchangeable.
   SKILL.md                 # filled from skill-template.md
   CONSTITUTION.md          # copy of distiller invariants
   MIND.md                  # compact models + heuristics
-  PERSON.md
-  STAKES.md               # Stage 8: why / skin / productive urgency                # relational texture
+  PERSON.md                # relational texture
+  STAKES.md               # Stage 8: why / skin / productive urgency
   MEMORY.md                # admitted traces
   RELATIONSHIPS.md         # per documented other; may be empty
   FIDELITY.md              # from fidelity-scorecard.md

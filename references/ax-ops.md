@@ -1,7 +1,8 @@
 # AX ops — Status, beats, checkpoints, machine-down
 
-Lean operator contract for Engram hill-climb **2.7.5+**. Process friction
-fixes — not fidelity. See also `scripts/ax_gate.py`.
+Lean operator contract for Engram hill-climb **2.7.6+**. Process friction
+fixes — not fidelity. See also `scripts/ax_gate.py` and
+`references/happy-path.md`.
 
 ## STATUS.md (single truth)
 
@@ -16,7 +17,7 @@ Minimum schema (keys or headings; case-insensitive):
 - phase: <e.g. G8 complete | Phase 1.5 awaiting approve | …>
 - fidelity: <score/grade or n/a>
 - stakes: <G8 PASS | pending | n/a>
-- gate: <pack version that last gated, e.g. 2.7.5>
+- gate: <pack version that last gated, e.g. 2.7.6>
 - I1: <public-legal | local-first | …>
 - updated: <YYYY-MM-DD America/Chicago>
 ```
@@ -27,7 +28,8 @@ Optional: one-line `next:` and `blockers:`. Point `PARITY-RUN.md` at
 ## Auto AX beat (after 1.5 / 2.5 / 4 / G8)
 
 After each of those milestones, append **exactly 5 lines** to
-`PARITY-RUN.md` and surface the same block via SendToUser:
+`PARITY-RUN.md` and surface the same block to the user in chat
+(Cursor hosts may use SendToUser; any host: message the user in chat):
 
 ```text
 AX beat — <milestone> — <YYYY-MM-DD>
@@ -58,19 +60,20 @@ Hard rules:
 
 ## Machine-down card
 
-When `ListMachines` is empty or Shell on the registered machine is
-unavailable:
+When the **host machine/session is not connected** (Cursor: `ListMachines`
+empty or Shell unavailable; other hosts: session/tooling down):
 
 ```text
-Machine-down — Engram needs your Mac (or registered host) connected.
-1. Reconnect the machine in Cursor / local tools.
-2. Confirm ListMachines shows connected=true.
+Machine-down — Engram needs your host machine/session connected.
+1. Reconnect the host machine / session (Cursor: local tools; confirm ListMachines connected=true).
+2. Message the user in chat with this card if Shell is unavailable.
 3. Re-run the last gate (phase1_gate / ax_gate / quality_check).
 4. Resume from STATUS.md phase — do not re-spawn Phase 1 blindly.
 ```
 
-First fix: reconnect. Then resume from Status. See SKILL failure table
-row **Machine-down**.
+First fix: reconnect host session. Then resume from Status. See SKILL
+failure table row **Machine-down**. ListMachines / SendToUser are
+examples for Cursor hosts, not hard requirements on every host.
 
 ## sources/INDEX.md + CAPTCHA stubs
 
@@ -79,6 +82,8 @@ row **Machine-down**.
 - CAPTCHA / Robot Challenge / Cloudflare interstitial fetches must **not**
   live under `sources/articles/`. Move to `sources/stubs/` or delete.
 - Prefer fetch-once into `sources/url-cache/` (`sha256(url)[:16].md`).
+- At phase 0.5 an empty `url-cache/` dir is OK (ax_gate WARN). Nonempty
+  is required after Phase 1.5+ / post-gather.
 
 ## Gate commands
 
@@ -87,5 +92,6 @@ python3 scripts/engram_doctor.py --engram <dir>   # url-cache PASS when nonempty
 python3 scripts/phase1_gate.py --engram <dir>
 python3 scripts/ax_gate.py                        # pack checks A–E
 python3 scripts/ax_gate.py --engram <dir>         # + engram F–J
-python3 scripts/quality_check.py <dir>/SKILL.md
+python3 scripts/merge_research.py --engram <dir>
+python3 scripts/quality_check.py --engram <dir>
 ```

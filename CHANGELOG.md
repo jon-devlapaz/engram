@@ -1,5 +1,22 @@
 # Changelog — Engram
 
+## 2.7.6 — Happy-path bootstrap + Gemini dogfood fixes (2026-09-04)
+
+- Add `references/happy-path.md`; README + SKILL Phase 0/0.5 point at it
+  (agent owns scripts; user consents host installs + 1.5/2.5 only).
+- P0: `engram_doctor._can_import` catches ModuleNotFoundError / ValueError /
+  AttributeError so dotted `google.genai` never crashes doctor.
+- P1: `ax_gate` check I — empty url-cache at phase 0.5 → WARN not FAIL;
+  FAIL missing dir or empty after Phase 1.5+/G*.
+- P1: `quality_check` counts ### Primary / ### Secondary bullets; honest
+  boundary accepts numbered lists; template 4+1 primary PASS.
+- P2: yt-dlp demoted to optional WARN (phase1_gate no longer blocked);
+  `merge_research` counts local `sources/...` paths; `download_subtitles.sh`
+  surfaces yt-dlp stderr + `-mmin -1` on auto-sub find; `--engram` on
+  merge_research + quality_check (positional kept).
+- P3: schema PERSON.md relational-texture typo; gemini-video `.env` path
+  docstring; ax-ops / check D host-neutral reconnect language.
+
 ## 2.7.5 — AX hill-climb quality gates (2026-09-04)
 
 - Doctor: optional `--engram`; url-cache-process **PASS** when
