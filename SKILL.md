@@ -236,8 +236,8 @@ Baidu Baike (see references/special-scenarios.md blacklist).
 
 ### Tools (same jobs as Nuwa)
 
-Scripts live in **this pack** (`engram-v2/scripts/`), not inside each
-output engram. Invoke them from the engram-v2 skill directory (or with
+Scripts live in **this pack** (`scripts/` in this pack), not inside each
+output engram. Invoke them from this skill directory (or with
 an absolute path to that `scripts/` folder). Engram prefers English
 captions first (English runtime); Nuwa prefers Chinese first — same
 job, intentional language order.
@@ -364,7 +364,7 @@ Also:
   Mark misses and return to the matching phase.
 - Write the finished SKILL.md to `~/.tink/skills/engrams/<slug>/SKILL.md`.
 
-### Phase 3 ship checklist (hybrid lesson — Demis eval 2026-09-04)
+### Phase 3 ship checklist
 
 Shipped SKILL.md **MUST** include:
 
@@ -379,20 +379,14 @@ Shipped SKILL.md **MUST** include:
       ledgers live in shared `references/research/`
 - [ ] **Fluid spoken attribution:** Evidence classes stay; answers use
       prose locators ("as I wrote…"), not `[Subject said]` bracket spam
-      (Expression DNA citation habit + Step-3 bullets)
 - [ ] **Tension dual-voice:** each Subject↔Witness conflict ships a short
       Subject primary quote beside Witness (Values / Limits / Latest)
-- [ ] Keep writing-for-agents wins: short description (~300 chars),
-      extracted special scenarios, mind-first once in Defaults, concrete
-      Step-2 look-ats, MEMORY TRACE discipline, distiller label, named
-      peers when present
+- [ ] Short frontmatter description (~300 chars); concrete Step-2
+      look-ats; MEMORY TRACE / Unrecorded discipline; named peers when
+      present
 
-**Do not** re-bloat the distiller toward frozen v1 ~769 lines. Lean agent
-UX + deep Step-3 / Evidence classes is the hybrid. Thin Step 3 alone
-cost ~5 FIDELITY pts on the Demis shared-corpus probe; rigid bracket
-attribution and under-voiced Subject on tensions cost the remaining
-style/stance points toward 98 — see `references/FIDELITY-GAPS.md` and
-`references/agentic-protocol.md`.
+Do not thin Step-3 or Evidence classes to chase line-count. Packaging
+rules: `references/agentic-protocol.md`.
 
 ### Agentic Protocol generation
 

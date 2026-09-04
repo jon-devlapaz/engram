@@ -1,6 +1,6 @@
 # Engram Constitution
 
-> Applies to **engram-v2** (writing-for-agents rewrite). v1 remains frozen separately.
+> Applies to this Engram skill pack.
 
 Purpose: **mind first** (models, judgment, expression), then
 **stakes** (skin in the game, why-of-existence, productive urgency).

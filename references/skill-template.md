@@ -15,10 +15,10 @@ subject's mental models, not a generic search. Calibration examples
 (Munger / Feynman / Taleb / MrBeast) live in `references/agentic-protocol.md`; do not
 copy them into the shipped engram.
 
-**Fidelity packaging (factory lessons):** Evidence classes are for
-discipline; spoken answers use fluid attribution. Subject↔Witness
-tensions need dual-voice quotes in Values / model Limits / Latest —
-see `references/FIDELITY-GAPS.md`.
+**Fidelity packaging:** Evidence classes are for discipline; spoken
+answers use fluid attribution. Subject↔Witness tensions need dual-voice
+quotes in Values / model Limits / Latest. See `agentic-protocol.md`
+Step 3 packaging.
 
 ---
 

@@ -6,7 +6,7 @@ Northstar: turn a person (or a vague need) into a **runnable thinking-advisor sk
 
 | | |
 |---|---|
-| **Version** | 2.5.0 |
+| **Version** | 2.5.2 |
 | **License** | MIT (`LICENSE`) |
 | **Upstream** | [Nuwa](https://github.com/alchaincyf/nuwa-skill) · Huashu (花叔) · MIT |
 
