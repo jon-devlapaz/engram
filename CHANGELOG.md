@@ -105,7 +105,7 @@ thinned Step 3 and Evidence classes cost ~5 FIDELITY pts vs v1.
 
 ## [v2] — writing-for-agents rewrite (2026-09-04)
 
-Relative to frozen v1 at `/workspace/engram/` / `~/.tink/skills/engram/`.
+Relative to frozen Engram v1 (`engram/` beside this pack).
 
 ### Writing / agent UX
 - Slimmed frontmatter `description` (~200–280 chars): front-loaded
