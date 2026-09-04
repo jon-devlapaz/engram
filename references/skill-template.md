@@ -237,7 +237,7 @@ for source transparency.
 
 ---
 
-> Distilled with **Engram** (set your public repo URL here after publish),
+> Distilled with **Engram**,
 > an English process fork of [Nuwa](https://github.com/alchaincyf/nuwa-skill).
 > Not the person.
 ```
