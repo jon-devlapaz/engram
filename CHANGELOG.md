@@ -1,5 +1,12 @@
 # Changelog — Engram
 
+## 2.6.0 — nested Phase-1 helpers (2026-09-04)
+
+Vendored real helper skills under `helpers/` (skill-within-skill):
+agent-reach, deep-research (huashu-research), gemini-video,
+web-article-reader, pdf (huashu-md-html). Anthropic proprietary pdf
+skill excluded (no redistribute).
+
 ## 2.5.6 — recommended Phase 1 helpers (2026-09-04)
 
 Info-gathering skills reframed as recommended installs for max-quality

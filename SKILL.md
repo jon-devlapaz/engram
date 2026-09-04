@@ -24,7 +24,7 @@ Memory is additive and admission-gated.
 | 1 | this file, agent table | Six research agents |
 | 0B | `references/vague-need.md` | No-name demand → candidate cards |
 | 1 / scenarios | `references/special-scenarios.md` | Living/historical, China allowlist, obscure, self-distill |
-| 1 / tools | `references/info-gathering-skills.md` | Recommended helpers — install for max Phase 1 quality |
+| 1 / tools | `references/info-gathering-skills.md` + `helpers/*/SKILL.md` | Nested Phase-1 helper skills (shipped in-tree) |
 | 1.5 | `scripts/merge_research.py` | Empirical review table |
 | 2 | `references/extraction-framework.md` | Triple verification, DNA, contradictions |
 | 3 | `references/skill-template.md` | Runtime skeleton |
@@ -248,13 +248,12 @@ first (English runtime).
 - Phase 1.5: `python3 scripts/merge_research.py <engram-dir>`
 - Phase 4: `python3 scripts/quality_check.py <engram-dir>/SKILL.md`
 
-#### Recommended info-gathering skills
+#### Nested info-gathering skills
 
-Before spawning Phase 1 agents, scan `<skills-root>/` and follow
-`references/info-gathering-skills.md`. These helpers are **recommended
-for max-quality distills** — if a job has no matching skill, tell the
-user what to install. Match by job; missing helper ≠ skip ledger; I1
-still binds.
+Before spawning Phase 1 agents, read `references/info-gathering-skills.md`
+and open the matching `helpers/<job>/SKILL.md` (shipped in this pack).
+Tell subagents the helper paths. Missing/broken helper ≠ skip ledger;
+fall back and note the gap. I1 still binds.
 
 ### Source priority
 

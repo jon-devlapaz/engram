@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Version** | 2.5.6 |
+| **Version** | 2.6.0 |
 | **License** | MIT (`LICENSE`) |
 
 ## Install
@@ -22,27 +22,27 @@ python3 scripts/merge_research.py path/to/engrams/<slug>
 python3 scripts/quality_check.py path/to/engrams/<slug>/SKILL.md
 ```
 
-## Recommended helpers
+## Nested helpers (Phase 1)
 
-For **max-quality** Phase 1 corpora, install skills (any brand) that cover
-these jobs — see `references/info-gathering-skills.md`:
+Shipped under `helpers/` — skill-within-skill:
 
-| Job | Why it matters |
+| Folder | Job |
 |---|---|
-| Video → transcript | Local video without captions |
-| Full-article reader | Real pages, not search snippets |
-| Multi-platform gatherer | X / Reddit / YouTube fragments |
-| Structured deep research | Depth on one dimension |
-| PDF text extraction | User-supplied books / papers |
+| `gemini-video` | local video → transcript (`GEMINI_API_KEY`) |
+| `web-article-reader` | full article → markdown |
+| `agent-reach` | multi-platform gather |
+| `deep-research` | structured deep research |
+| `pdf` | PDF/DOCX/EPUB → markdown (MIT `huashu-md-html`) |
 
-Engram still runs without them; corpus quality drops. Prefer installing
-before a standard or deep distill.
+See `helpers/README.md` and `helpers/THIRD_PARTY.md`.
+
 
 ## What ships in this pack
 
 ```
 SKILL.md            # Distiller
 CONSTITUTION.md     # Non-negotiables
+helpers/            # Nested Phase-1 skills (video, article, reach, research, pdf)
 references/         # Phase refs (template, scorecard, scenarios, …)
 scripts/            # merge_research, quality_check, captions, srt clean
 LICENSE VERSION CHANGELOG.md README.md
