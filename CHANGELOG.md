@@ -1,5 +1,19 @@
 # Changelog — Engram
 
+## 2.7.9 — purify (2026-09-04)
+
+- Drop audit stubs: untracked `AGENTS.md`; tracked
+  `helpers/QUALITY-GATES-2.6.1.md` / `QUALITY-GATES-2.6.2.md`.
+- SKILL.md pointer dedupe: Phase 0.5 doctor/gate → `happy-path.md`;
+  AX beat / approve|revise|stop → `ax-ops.md`; helper routing →
+  `info-gathering-skills.md` (Helper block template kept); required-reading
+  table reordered by phase; `--engram` canonical for CLI.
+- `ax-ops.md` / `info-gathering-skills.md`: Nuwa / host-neutral trims;
+  hill-climb pin **2.7.9+**.
+- `ax_gate.py`: drop 2.7.6 version pin in docstring / argparse.
+- Happy-path header + README VERSION → 2.7.9; light SOURCE.md Nuwa
+  job-label trim (gemini-video / web-article-reader).
+
 ## 2.7.8 — smoke fixture + quality hints (2026-09-04)
 
 - Add `examples/minimal-fixture/` (fake engram) + `scripts/test_smoke.py`

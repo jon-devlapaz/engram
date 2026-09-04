@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Version** | 2.7.8 |
+| **Version** | 2.7.9 |
 | **License** | MIT (`LICENSE`) |
 
 ## Happy path
@@ -31,6 +31,8 @@ python3 scripts/merge_research.py --engram path/to/engrams/<slug>
 python3 scripts/quality_check.py --engram path/to/engrams/<slug>
 python3 scripts/test_smoke.py   # pack regression vs examples/minimal-fixture
 ```
+
+Prefer `--engram <dir>` (canonical). Positional `<dir>` / `<SKILL.md>` still accepted for backward compatibility.
 
 ## Nested helpers (Phase 1)
 

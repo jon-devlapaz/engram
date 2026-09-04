@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Engram AX quality gate suite (hill-climb 2.7.6).
+"""Engram AX quality gate suite.
 
 Exit codes:
   0  all checks PASS (warns allowed)
@@ -438,7 +438,7 @@ def resolve_pack(explicit: str | None) -> Path:
 def main(argv: list[str] | None = None) -> int:
     try:
         parser = argparse.ArgumentParser(
-            description="Engram AX quality gate (2.7.6)"
+            description="Engram AX quality gate"
         )
         parser.add_argument(
             "--pack",

@@ -20,21 +20,21 @@ Memory is additive and admission-gated.
 
 | Phase | File | Why |
 |---|---|---|
-| 0.5 | `references/schema.md` | Directory layout (01–06 ledgers) |
-| 1 | this file, agent table | Six research agents |
-| 0B | `references/vague-need.md` | No-name demand → candidate cards |
-| 1 / scenarios | `references/special-scenarios.md` | Living/historical, China allowlist, obscure, self-distill |
-| 1 / tools | `references/info-gathering-skills.md` + `helpers/*/SKILL.md` | Nested Phase-1 helper skills (shipped in-tree) |
-| before 1 / gate | `scripts/phase1_gate.py` (+ doctor / `helpers/doctor/SKILL.md`) | Spawn gate: doctor blockers + url-cache; wizards on WARN/FAIL |
+| before run | `references/version-self-check.md` | Silent 30-day update check (I4 non-git skip) |
 | 0 / 0.5 | `references/happy-path.md` | Agentic bootstrap: agent owns scripts; user consents host installs + 1.5/2.5 |
+| 0B | `references/vague-need.md` | No-name demand → candidate cards |
+| 0.5 | `references/schema.md` | Directory layout (01–06 ledgers) |
 | 0.5 / AX | `references/ax-ops.md` + `scripts/ax_gate.py` | STATUS.md, AX beats, hard checkpoint verbs, machine-down |
+| before 1 / gate | `scripts/phase1_gate.py` (+ doctor / `helpers/doctor/SKILL.md`) | Spawn gate: doctor blockers + url-cache; wizards on WARN/FAIL |
+| 1 | this file, agent table | Six research agents |
+| 1 / tools | `references/info-gathering-skills.md` + `helpers/*/SKILL.md` | Nested Phase-1 helpers (Helper block + routing) |
+| 1 / scenarios | `references/special-scenarios.md` | Living/historical, China allowlist, obscure, self-distill |
 | 1.5 | `scripts/merge_research.py` | Empirical review table |
 | 2 | `references/extraction-framework.md` | Triple verification, DNA, contradictions |
 | 3 | `references/skill-template.md` | Runtime skeleton |
 | 3 | `references/agentic-protocol.md` | Derive Step-2 tracks; calibration; Step-3 packaging |
 | 4 | `scripts/quality_check.py` then `references/fidelity-scorecard.md` | Mechanical QA + independent scorecard |
 | 8 / opt-in | `references/optional-immersion.md` | Immersion / CTT only when asked |
-| before run | `references/version-self-check.md` | Silent 30-day update check (I4 non-git skip) |
 | memory | Constitution four tests + schema TRACE record | Additive, after models exist |
 
 Synthesize from ledgers and required files only. Read the files when
@@ -76,10 +76,9 @@ Phase 0 entry:
 
 1. Who is the person (confirm identity).
 2. Full portrait vs one dimension.
-3. Use: thinking advisor / mind (default), immersion/texture, or both.
-   Default is **mind only**. Solicit intimate drops only when they asked
-   for immersion, CTT, or texture. Stage 8 (stakes) is a post-mind gate,
-   not an intimate drop.
+3. Use: thinking advisor / mind (default). Immersion/CTT only if asked
+   (`references/optional-immersion.md`). Stage 8 (stakes) is a post-mind
+   gate, not an intimate drop.
 4. New vs update (scan `<skills-root>/engrams/` and
    `<skills-root>/personas-skillset/`).
 5. **Resource drop** (enrichment first). Ask for primary files that
@@ -149,53 +148,32 @@ happen. The folder must be self-contained.
 **Completion checklist (run before Phase 1):**
 - [ ] Directory exists at `<skills-root>/engrams/<slug>/` with
       `references/research/` and `sources/{books,transcripts,articles}/`
-- [ ] `CONSTITUTION.md` copied in
+- [ ] `CONSTITUTION.md` copied in; `STATUS.md` skeleton (`references/ax-ops.md`)
+- [ ] `mkdir sources/url-cache` (shared fetch-once). Create
+      `sources/INDEX.md` (primary / secondary / stub); quarantine CAPTCHA
+      stubs out of `articles/`.
 - [ ] If this is an update: existing SKILL.md read; stale slices marked
-- [ ] If the user supplied files: copy them into `sources/` by the
-      Phase 1 file-type table (not a second map). Then mark
-      **local-corpus mode** in the run notes:
-      `mode: local-first` or `mode: pure-local`
+- [ ] If the user supplied files: copy into `sources/` by the Phase 1
+      file-type table; mark `mode: local-first` or `mode: pure-local`
 - [ ] Texture files: `intimate: yes` only with consent if living;
       then create `07-intimate.md`. Memos stay 05.
 - [ ] If no user files and the run is fast/standard public-figure:
       mark `mode: pure-web` (ceiling = mind; public texture incidental)
 - [ ] If no user files and the run is deep / CTT / self-distill /
       living private: **halt**. Prefer halt over marking pure-web.
-- [ ] If the subject is Chinese-language: **switch source strategy now**
-      (`references/special-scenarios.md` → China vs West). Prefer original
-      Bilibili / Xiaoyuzhou (or Ximalaya original audio) and the Chinese
-      outlet allowlist.
-- [ ] If unique usable sources look like they will be <10: run the
-      **obscure-person procedure** now (warn, 2–3 models, expand
-      honest boundary). Surface this before Phase 4.
-- [ ] Nested helpers present: `helpers/{gemini-video,web-article-reader,agent-reach,deep-research,pdf}/SKILL.md`
-      (relative to this Engram pack). Record absolute pack path as
-      `ENGRAM_PACK=` for spawn prompts.
-- [ ] Create `<engram>/sources/url-cache/` (shared fetch-once across agents).
-- [ ] Preflight: run `python3 scripts/engram_doctor.py --engram <dir>`
-      then `python3 scripts/phase1_gate.py --engram <dir> --mkdir-cache`.
-      Gate exits non-zero if `blocker_fails > 0` or url-cache **directory**
-      missing — do not spawn Phase 1. True blockers: `python3`, missing
-      helper/script files. **yt-dlp is optional WARN** — label YT path as
-      gap if missing (not a spawn blocker). If blockers: ONE consent —
-      install / proceed labeled gaps / stop. Never silent brew/pipx.
-      Optional WARNs: default proceed with labeled gaps unless user asked
-      max-fidelity bootstrap. Wizards: `helpers/doctor/SKILL.md`.
-- [ ] Read `references/info-gathering-skills.md` once; you will paste the
-      **Helper block** into every Phase 1 agent prompt (mandatory).
-- [ ] **I1 enrichment (optional):** if quote density matters and the
-      subject has copyrighted primaries (CW, Red Book, memoirs), ask
-      once for user-supplied legal files before Phase 1 deep gather —
-      do not invent access. Pure-web mind still ships without them.
-- [ ] Create `STATUS.md` skeleton (overwrite-in-place single truth —
-      phase / fidelity / stakes / gate / I1). Schema:
-      `references/ax-ops.md`.
-- [ ] Create `sources/INDEX.md` (primary / secondary / stub). Quarantine
-      CAPTCHA stubs to `sources/stubs/` (never leave under `articles/`).
-- [ ] AX quality: `python3 scripts/ax_gate.py` (pack) then
-      `python3 scripts/ax_gate.py --engram <dir>`. At phase 0.5 empty
-      `url-cache/` is WARN (empty OK), not FAIL. Exit non-zero on FAIL —
-      fix before calling the run healthy.
+- [ ] Chinese-language subject → switch source strategy now
+      (`references/special-scenarios.md`). Obscure (<10 sources) → warn
+      now; surface before Phase 4.
+- [ ] Nested helpers present under `helpers/`; set `ENGRAM_PACK=` absolute
+      pack path. Read `references/info-gathering-skills.md` once — paste
+      the **Helper block** into every Phase 1 spawn (mandatory).
+- [ ] **Doctor hard-gate:** follow `references/happy-path.md` —
+      `engram_doctor` then `phase1_gate.py --engram <dir> --mkdir-cache`.
+      Do **not** spawn Phase 1 while `blocker_fails > 0` or url-cache dir
+      missing. Never silent brew/pipx. Then `ax_gate.py` (pack + `--engram`);
+      empty url-cache at 0.5 is WARN, not FAIL.
+- [ ] **I1 enrichment (optional):** ask once for user-supplied legal
+      primaries if quote density matters — do not invent access.
 
 ## Phase 1 — Six-agent corpus
 
@@ -256,49 +234,13 @@ letters, messages, home recordings, relationship speech. Prefer empty
   `Inference`.
 - Keep contradictions. Prefer unresolved tension over smoothing.
 
-### Per-agent helper routing (mandatory)
+### Helpers + routing (mandatory)
 
-Before spawn, map each agent to helpers. Prefer the listed helpers over
-bare search snippets. Paths are under `ENGRAM_PACK` (this Engram install).
-
-| Agent | Ledger | Prefer these helpers / scripts |
-|---|---|---|
-| 1 Writings | `01-writings.md` | `helpers/pdf/SKILL.md` for user books/papers (I1); `helpers/web-article-reader/SKILL.md` for important essay URLs; `helpers/deep-research/SKILL.md` if this ledger is thin after a first pass |
-| 2 Conversations | `02-conversations.md` | YouTube: `scripts/download_subtitles.sh` then `srt_to_transcript.py`; local/no-caption video: `helpers/gemini-video/SKILL.md`; discover talks: `helpers/agent-reach/SKILL.md` |
-| 3 Expression | `03-expression-dna.md` | `helpers/agent-reach/SKILL.md` for X/Reddit/short platforms; `helpers/web-article-reader/SKILL.md` for long posts |
-| 4 External | `04-external-views.md` | `helpers/web-article-reader/SKILL.md` + `helpers/deep-research/SKILL.md` for criticism / biography threads |
-| 5 Decisions | `05-decisions.md` | `helpers/deep-research/SKILL.md` + `helpers/web-article-reader/SKILL.md` on filings, news, postmortems |
-| 6 Timeline | `06-timeline.md` | `helpers/deep-research/SKILL.md` for last-12-months sweep; article-reader on milestone URLs |
-
-**Rules:** Read the helper `SKILL.md` before first use in a run. Helper
-failure ≠ skip ledger — fall back (fetch / captions / available PDF tools)
-and note the gap in the ledger. I1 still binds for books/PDFs.
-
-### Spine-first (anti-duplicate deep-research)
-
-Jung Phase-1 lesson: six agents each re-deep-researched the same spine
-(Freud break, Red Book, timeline hubs) and re-fetched the same URLs.
-
-1. **Spawn Agent 6 (Timeline) first** — or one designated spine agent —
-   for shared milestones / hub URLs. It writes `sources/url-cache/` and
-   a short `references/research/00-spine.md` (optional, ≤40 lines:
-   hubs + dates + cache paths).
-2. **Then spawn 1–5 in parallel.** Each must: (a) check `url-cache/`
-   before any fetch; (b) **not** re-run `deep-research` on spine hubs
-   already covered unless *their* ledger is uniquely thin after reading
-   the spine note + cache; (c) own only ledger-specific depth.
-3. Shared URLs → one cache file; ledger cites the cache path.
-
-### Helper usage log (one schema)
-
-Append one line per helper attempt to `<engram>/PARITY-RUN.md` (or
-`HELPER-LOG.md`):
-
-```
-|agent|helper|trigger|outcome|cache=hit|miss|n/a|notes|
-```
-
-Example: `|2|web-article-reader|Face to Face URL|ok|miss|saved articles/…|`
+Per-agent helper preference, spine-first anti-duplicate, URL-cache rules,
+and helper-log schema: `references/info-gathering-skills.md`. Read the
+helper `SKILL.md` before first use. Helper failure ≠ skip ledger. I1
+binds for books/PDFs. Fill preferred helpers from that routing table
+into the prompt below.
 
 ### Agent prompt (copy, fill blanks — do not omit Helper block)
 
@@ -341,7 +283,7 @@ Engram pack scripts (YouTube captions — prefer before gemini-video):
 - bash [ENGRAM_PACK]/scripts/download_subtitles.sh <YouTube_URL> <out-dir>
 - python3 [ENGRAM_PACK]/scripts/srt_to_transcript.py <input.srt> <engram>/sources/transcripts/<name>.txt
 
-This agent’s preferred helpers: [paste row from Per-agent helper routing].
+This agent’s preferred helpers: [paste row from references/info-gathering-skills.md].
 URL cache (mandatory):
 - Check [engram]/sources/url-cache/ before any fetch.
 - Key file as sha256(url)[:16].md (or a stable slug). First line: `url: …`
@@ -368,8 +310,9 @@ first (English runtime).
   then `python3 scripts/srt_to_transcript.py <input.srt> <sources/transcripts/…>`
 - **Podcasts:** search for published transcripts (e.g. podcastnotes.org
   and the show's own site) before relying on captions.
-- Phase 1.5: `python3 scripts/merge_research.py <engram-dir>`
-- Phase 4: `python3 scripts/quality_check.py <engram-dir>/SKILL.md`
+- Phase 1.5: `python3 scripts/merge_research.py --engram <engram-dir>`
+- Phase 4: `python3 scripts/quality_check.py --engram <engram-dir>`
+  (positional `<dir>` / `<SKILL.md>` still accepted for backward compat)
 
 #### Nested info-gathering skills (hard bind)
 
@@ -377,9 +320,7 @@ first (English runtime).
 2. Set `ENGRAM_PACK` to this pack’s absolute path.
 3. Paste the **Helper block** into **every** Phase 1 agent prompt (see
    template above). Do not spawn without it.
-4. Apply **Per-agent helper routing** so each ledger prefers the right
-   helpers.
-5. Helper missing/broken ≠ skip ledger; fall back and note the gap. I1
+4. Helper missing/broken ≠ skip ledger; fall back and note the gap. I1
    still binds.
 
 ### Source priority
@@ -413,20 +354,13 @@ Prefer a labeled 60 to a fabricated 90.
 
 ### Phase 1.5 checkpoint — PAUSE
 
-Run `python3 scripts/merge_research.py <engram-dir>` and show the table
-(source counts, primary share, holes, contradictions). Update
-`STATUS.md`. Emit an **AX beat** (5 lines per `references/ax-ops.md`):
-append to `PARITY-RUN.md` + SendToUser.
-
-**Hard stop.** Present widget/options with verbs exactly
-**approve | revise | stop** (not vague "proceed").
-- `approve` → start Phase 2
-- `revise` → they name a weak ledger; re-research, re-merge, pause again
-- `stop` → halt distill
-
-Dismiss/skip ≠ approve. Do not treat bare "proceed" / "continue" as
-approve unless they name the phase ("approve Phase 1.5"). Start Phase 2
-only after `approve`, unless `waiver: run-through` is already recorded.
+Run `python3 scripts/merge_research.py --engram <engram-dir>` and show
+the table (source counts, primary share, holes, contradictions). Update
+`STATUS.md`. Emit an **AX beat** and hard-stop with **approve | revise |
+stop** per `references/ax-ops.md` (dismiss ≠ approve; bare "proceed" is
+not approve unless the phase is named). Start Phase 2 only after
+`approve`, unless `waiver: run-through` is recorded.
+- `approve` → Phase 2 · `revise` → re-research thin ledger · `stop` → halt
 Garbage in, garbage out — this gate exists so Phase 4 is not where you
 discover empty ledgers.
 
@@ -454,19 +388,11 @@ Write `MIND.md`, `PERSON.md`, `MEMORY.md`, `RELATIONSHIPS.md`.
 ### Phase 2.5 checkpoint — PAUSE
 
 Show: model names (3–7), heuristic count, three DNA features, tensions,
-boundary line count, admitted-trace count. Update `STATUS.md`. Emit an
-**AX beat** (5 lines per `references/ax-ops.md`): append to
-`PARITY-RUN.md` + SendToUser.
-
-**Hard stop.** Present widget/options with verbs exactly
-**approve | revise | stop** (not vague "proceed").
-- `approve` → start Phase 3
-- `revise` → stay in Phase 2; patch models/DNA, then pause again
-- `stop` → halt distill
-
-Dismiss/skip ≠ approve. Do not treat bare "proceed" / "continue" as
-approve unless they name the phase ("approve Phase 2.5"). Start Phase 3
-only after `approve`, unless `waiver: run-through` is already recorded.
+boundary line count, admitted-trace count. Update `STATUS.md`. AX beat +
+**approve | revise | stop** per `references/ax-ops.md` (same verb rules
+as 1.5 / Defaults). Start Phase 3 only after `approve`, unless
+`waiver: run-through` is recorded.
+- `approve` → Phase 3 · `revise` → patch models/DNA · `stop` → halt
 Synthesis is the most subjective step — write the runtime skill on
 confirmed lenses.
 
@@ -550,7 +476,7 @@ fabricate from training data. Required in `skill-template.md`; do not drop it.
 
 ## Phase 4 — Validation + scorecard
 
-1. Run `python3 scripts/quality_check.py <SKILL.md>`. Fix FAILs.
+1. Run `python3 scripts/quality_check.py --engram <dir>`. Fix FAILs.
 2. Independent answerer (engram folder only, no web) vs independent
    judge using `references/fidelity-scorecard.md` (stance 30, style 20,
    edge 20, source 15, structure 15). Write `FIDELITY.md`.
@@ -569,13 +495,12 @@ fabricate from training data. Required in `skill-template.md`; do not drop it.
    register if 07 exists). Veto overrides an A.
 5. Iterate Phase 2→4 at most twice, then ship with holes labeled.
 6. Show the scorecard and ask for confirmation before calling it done.
-7. Update `STATUS.md` (fidelity). Emit an **AX beat** after Phase 4
-   (template in `references/ax-ops.md`). Re-run
-   `python3 scripts/ax_gate.py --engram <dir>` before calling Done.
+7. Update `STATUS.md` (fidelity). AX beat after Phase 4
+   (`references/ax-ops.md`). Re-run
+   `python3 scripts/ax_gate.py --engram <dir>` before Done.
 8. Pack regression (maintainers): `python3 scripts/test_smoke.py`.
 
-Informed CTT only / no deceptive relative tests: run CTT only if they
-name an evaluator and 07 exists.
+Immersion / CTT: opt-in only — `references/optional-immersion.md`.
 
 ## Phase 5 — Dual-agent refine
 
@@ -663,10 +588,9 @@ not float as a clever abstract model deck.
       where corpus is silent)
 - [ ] Soft immersion not smuggled in as a substitute for stakes
 - [ ] `STATUS.md` updated (`stakes: G8 PASS`); **AX beat** appended
-      (`references/ax-ops.md`) + SendToUser
+      (`references/ax-ops.md`)
 
-**Immersion / CTT:** see `references/optional-immersion.md` (opt-in only,
-user-supplied, informed CTT, empty 07 fine).
+**Immersion / CTT:** `references/optional-immersion.md` (opt-in only).
 
 ## Done
 
@@ -674,8 +598,8 @@ Self-contained `<skills-root>/engrams/<slug>/`: ledgers 01–06,
 template-complete SKILL.md, `FIDELITY.md`, `STATUS.md`, `quality_check.py`
 PASS, `python3 scripts/ax_gate.py --engram <dir>` PASS, ceiling **mind**
 by default; writes confined to that folder (+ this chat). Mind ships at
-G7; Stage 8 (stakes) is the next hill. Immersion / CTT only if
-separately requested with corpus.
+G7; Stage 8 (stakes) is the next hill. Immersion / CTT: Defaults +
+`optional-immersion.md`.
 
 ## Version self-check (silent)
 

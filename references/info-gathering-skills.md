@@ -7,8 +7,8 @@ them. Phase 1 does **not** scan a host skills root. Invocation is:
 2. Every Phase 1 subagent prompt includes the **Helper block** from
    `SKILL.md` (mandatory).
 3. Subagents **read** `helpers/<job>/SKILL.md` then execute when a
-   trigger hits — same pattern Nuwa used (“tell the swarm”), but with
-   in-tree paths and per-ledger routing so it cannot be skipped.
+   trigger hits — in-tree paths and per-ledger routing so it cannot be
+   skipped.
 
 ## Job table
 
