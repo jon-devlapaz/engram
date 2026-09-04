@@ -1,5 +1,14 @@
 # Changelog — Engram
 
+## 2.7.0 — preflight doctor + troubleshooting wizards (2026-09-04)
+
+`scripts/engram_doctor.py` checks nested helpers, pack scripts, and host
+CLIs (python3 / yt-dlp blockers; ffmpeg, poppler, agent-reach, playwright,
+gemini, pdf deps optional). `helpers/doctor/SKILL.md` wizards for WARN/FAIL
+and mid-run helper failure (re-doctor → fix → resume). Detect-only for
+agent-reach (Jung Phase-1 postmortem). Process note for `sources/url-cache`
+fetch-once.
+
 ## 2.6.2 — hard-bind Phase 1 helpers (2026-09-04)
 
 Mandatory Helper block in every Phase 1 agent prompt; per-agent helper

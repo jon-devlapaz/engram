@@ -25,6 +25,7 @@ Memory is additive and admission-gated.
 | 0B | `references/vague-need.md` | No-name demand → candidate cards |
 | 1 / scenarios | `references/special-scenarios.md` | Living/historical, China allowlist, obscure, self-distill |
 | 1 / tools | `references/info-gathering-skills.md` + `helpers/*/SKILL.md` | Nested Phase-1 helper skills (shipped in-tree) |
+| before 1 / doctor | `scripts/engram_doctor.py` + `helpers/doctor/SKILL.md` | Preflight CLIs/helpers; troubleshooting wizards on WARN/FAIL |
 | 1.5 | `scripts/merge_research.py` | Empirical review table |
 | 2 | `references/extraction-framework.md` | Triple verification, DNA, contradictions |
 | 3 | `references/skill-template.md` | Runtime skeleton |
@@ -158,6 +159,11 @@ happen. The folder must be self-contained.
 - [ ] Nested helpers present: `helpers/{gemini-video,web-article-reader,agent-reach,deep-research,pdf}/SKILL.md`
       (relative to this Engram pack). Record absolute pack path as
       `ENGRAM_PACK=` for spawn prompts.
+- [ ] Preflight: run `python3 scripts/engram_doctor.py` (and `--json` if
+      scripting). On WARN/FAIL open `helpers/doctor/SKILL.md` and walk
+      `next_wizards` before spawn. Blockers (python3, yt-dlp, missing
+      helper/script files) must be clear; optional warns may proceed
+      with labeled gaps.
 - [ ] Read `references/info-gathering-skills.md` once; you will paste the
       **Helper block** into every Phase 1 agent prompt (mandatory).
 

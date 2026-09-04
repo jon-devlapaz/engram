@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Version** | 2.6.2 |
+| **Version** | 2.7.0 |
 | **License** | MIT (`LICENSE`) |
 
 ## Install
@@ -18,6 +18,7 @@ Place this tree where your agent loads skills (example: `<skills-root>/engram/`)
 3. Write distilled outputs to `engrams/<slug>/`.
 
 ```bash
+python3 scripts/engram_doctor.py          # preflight (helpers + CLIs)
 python3 scripts/merge_research.py path/to/engrams/<slug>
 python3 scripts/quality_check.py path/to/engrams/<slug>/SKILL.md
 ```
@@ -33,6 +34,7 @@ Shipped under `helpers/` — skill-within-skill:
 | `agent-reach` | multi-platform gather |
 | `deep-research` | structured deep research |
 | `pdf` | PDF/DOCX/EPUB → markdown (MIT `huashu-md-html`) |
+| `doctor` | preflight + troubleshooting wizards (`scripts/engram_doctor.py`) |
 
 See `helpers/README.md` and `helpers/THIRD_PARTY.md`.
 
@@ -44,9 +46,9 @@ Phase 1 **hard-binds** these into every agent spawn (Helper block + per-agent ro
 ```
 SKILL.md            # Distiller
 CONSTITUTION.md     # Non-negotiables
-helpers/            # Nested Phase-1 skills (video, article, reach, research, pdf)
+helpers/            # Nested Phase-1 skills (video, article, reach, research, pdf, doctor)
 references/         # Phase refs (template, scorecard, scenarios, …)
-scripts/            # merge_research, quality_check, captions, srt clean
+scripts/            # engram_doctor, merge_research, quality_check, captions, srt clean
 LICENSE VERSION CHANGELOG.md README.md
 ```
 

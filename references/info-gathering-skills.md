@@ -49,4 +49,23 @@ python3 "$ENGRAM_PACK/scripts/srt_to_transcript.py" <input.srt> <engram>/sources
 6. Phase 1.5: if a ledger is thin, re-run that agent **with the same
    Helper block** and the deep-research preference explicit.
 
+## Preflight doctor
+
+Before Phase 1 spawn (and after mid-run helper failure):
+
+```bash
+python3 "$ENGRAM_PACK/scripts/engram_doctor.py"
+python3 "$ENGRAM_PACK/scripts/engram_doctor.py" --json
+```
+
+- Checks nested `helpers/*/SKILL.md`, pack scripts, and host CLIs.
+- **Blockers:** `python3`, `yt-dlp`, missing helper/script files → exit 1.
+- **Optional warns:** ffmpeg, pdftotext, agent-reach CLI, playwright, gemini
+  SDK/key, pdf Python deps, url-cache process note.
+- On WARN/FAIL: open `helpers/doctor/SKILL.md`, walk JSON `next_wizards`,
+  re-doctor, then resume.
+- Doctor **detects only** — do not install `agent-reach` (or other host
+  tools) without the user. Jung Phase-1 lesson: helper SKILL present ≠
+  CLI on PATH.
+
 Provenance: `helpers/THIRD_PARTY.md`, each `helpers/*/SOURCE.md`.
