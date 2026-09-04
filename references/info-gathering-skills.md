@@ -60,12 +60,42 @@ python3 "$ENGRAM_PACK/scripts/engram_doctor.py" --json
 
 - Checks nested `helpers/*/SKILL.md`, pack scripts, and host CLIs.
 - **Blockers:** `python3`, `yt-dlp`, missing helper/script files → exit 1.
+  **Do not spawn Phase 1 while `blocker_fails > 0`.**
 - **Optional warns:** ffmpeg, pdftotext, agent-reach CLI, playwright, gemini
-  SDK/key, pdf Python deps, url-cache process note.
+  SDK/key, pdf Python deps, url-cache process note. Proceed only with
+  labeled gaps in run notes.
 - On WARN/FAIL: open `helpers/doctor/SKILL.md`, walk JSON `next_wizards`,
   re-doctor, then resume.
 - Doctor **detects only** — do not install `agent-reach` (or other host
   tools) without the user. Jung Phase-1 lesson: helper SKILL present ≠
   CLI on PATH.
+
+## Shared URL cache
+
+1. Ensure `<engram>/sources/url-cache/` exists before spawn.
+2. Before fetch: look for `sha256(url)[:16].md` (or stable slug); first
+   line must be `url: <original>`.
+3. Hit → reuse. Miss → fetch once, write cache, then save under
+   `sources/articles/` or `sources/transcripts/` as needed.
+4. Never re-fetch a cached URL from another agent in the same run.
+
+## Spine-first
+
+Spawn Timeline (Agent 6) — or one spine agent — **before** the other
+five. Optional `references/research/00-spine.md` (≤40 lines) lists hub
+URLs + cache paths. Agents 1–5 consume cache; they re-run deep-research
+on a hub only if their ledger is uniquely thin after reading spine + cache.
+
+## Helper log schema
+
+One line per attempt in `PARITY-RUN.md`:
+
+`|agent|helper|trigger|outcome|cache=hit|miss|n/a|notes|`
+
+## I1 enrichment (optional)
+
+If quote density matters, ask once for user-supplied legal primaries
+before deep gather. Pure-web mind still ships without them. Never invent
+book access.
 
 Provenance: `helpers/THIRD_PARTY.md`, each `helpers/*/SOURCE.md`.

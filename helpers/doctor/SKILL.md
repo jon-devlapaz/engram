@@ -145,19 +145,23 @@ I1 still binds: user-supplied / legal files only. Re-doctor.
 
 **When:** `url-cache-process` warn (info severity — always offered as process hygiene).
 
-**Do:** Prefer **fetch-once** into the engram's `sources/url-cache/`:
+**Do:** **Fetch-once** into the engram's `sources/url-cache/` (mandatory
+process, not optional hygiene):
 1. Create `sources/url-cache/` under the engram folder if missing.
-2. Before re-fetching a URL, check for an existing cache file keyed by URL
-   or slug.
-3. On first fetch (Jina, article-reader, WebFetch), save the raw/markdown
-   body under `sources/url-cache/` and reference that path from the ledger.
-4. Mid-run: if a URL was already cached, reuse it — do not hammer the origin.
+2. Key files as `sha256(url)[:16].md` (or stable slug); first line `url: …`.
+3. Before any fetch, check cache. Hit → reuse. Miss → fetch once, write
+   cache, then copy/link into `sources/articles/` or `transcripts/`.
+4. Pair with spine-first spawn (Agent 6 / `00-spine.md`) so agents 1–5
+   do not re-deep-research shared hubs.
+5. Log `|agent|helper|…|cache=hit|miss|…|` in `PARITY-RUN.md`.
 
 This is a process wizard, not a host package install.
 
 ## Anti-patterns (do not)
 
 - **Spawn with missing yt-dlp** after a blocker fail — fix or halt that path.
+- **Spawn while doctor `blocker_fails > 0`** — clear blockers first.
+- **Six-way parallel deep-research on the same spine** — spine-first + url-cache.
 - **Silent degrade** — always log helper failure; label ledger gaps.
 - **Paste API keys** into ledgers, SKILL drafts, commits, or scorecards.
 - **Pirate tools / pirate book sites** — Engram I1; refuse.

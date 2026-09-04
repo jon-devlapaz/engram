@@ -159,13 +159,18 @@ happen. The folder must be self-contained.
 - [ ] Nested helpers present: `helpers/{gemini-video,web-article-reader,agent-reach,deep-research,pdf}/SKILL.md`
       (relative to this Engram pack). Record absolute pack path as
       `ENGRAM_PACK=` for spawn prompts.
+- [ ] Create `<engram>/sources/url-cache/` (shared fetch-once across agents).
 - [ ] Preflight: run `python3 scripts/engram_doctor.py` (and `--json` if
-      scripting). On WARN/FAIL open `helpers/doctor/SKILL.md` and walk
-      `next_wizards` before spawn. Blockers (python3, yt-dlp, missing
-      helper/script files) must be clear; optional warns may proceed
-      with labeled gaps.
+      scripting). **Do not spawn Phase 1 while `blocker_fails > 0`.**
+      Open `helpers/doctor/SKILL.md` and clear blockers first. Optional
+      warns may proceed only with **labeled gaps** in run notes (e.g.
+      agent-reach CLI missing → Jina/yt-dlp fallback).
 - [ ] Read `references/info-gathering-skills.md` once; you will paste the
       **Helper block** into every Phase 1 agent prompt (mandatory).
+- [ ] **I1 enrichment (optional):** if quote density matters and the
+      subject has copyrighted primaries (CW, Red Book, memoirs), ask
+      once for user-supplied legal files before Phase 1 deep gather —
+      do not invent access. Pure-web mind still ships without them.
 
 ## Phase 1 — Six-agent corpus
 
@@ -244,6 +249,32 @@ bare search snippets. Paths are under `ENGRAM_PACK` (this Engram install).
 failure ≠ skip ledger — fall back (fetch / captions / available PDF tools)
 and note the gap in the ledger. I1 still binds for books/PDFs.
 
+### Spine-first (anti-duplicate deep-research)
+
+Jung Phase-1 lesson: six agents each re-deep-researched the same spine
+(Freud break, Red Book, timeline hubs) and re-fetched the same URLs.
+
+1. **Spawn Agent 6 (Timeline) first** — or one designated spine agent —
+   for shared milestones / hub URLs. It writes `sources/url-cache/` and
+   a short `references/research/00-spine.md` (optional, ≤40 lines:
+   hubs + dates + cache paths).
+2. **Then spawn 1–5 in parallel.** Each must: (a) check `url-cache/`
+   before any fetch; (b) **not** re-run `deep-research` on spine hubs
+   already covered unless *their* ledger is uniquely thin after reading
+   the spine note + cache; (c) own only ledger-specific depth.
+3. Shared URLs → one cache file; ledger cites the cache path.
+
+### Helper usage log (one schema)
+
+Append one line per helper attempt to `<engram>/PARITY-RUN.md` (or
+`HELPER-LOG.md`):
+
+```
+|agent|helper|trigger|outcome|cache=hit|miss|n/a|notes|
+```
+
+Example: `|2|web-article-reader|Face to Face URL|ok|miss|saved articles/…|`
+
 ### Agent prompt (copy, fill blanks — do not omit Helper block)
 
 Every Phase 1 spawn **must** include the Helper block verbatim (paths
@@ -286,8 +317,13 @@ Engram pack scripts (YouTube captions — prefer before gemini-video):
 - python3 [ENGRAM_PACK]/scripts/srt_to_transcript.py <input.srt> <engram>/sources/transcripts/<name>.txt
 
 This agent’s preferred helpers: [paste row from Per-agent helper routing].
-URL cache: check [engram]/sources/url-cache/ before fetching.
-If hit, reuse. If miss, fetch once, write cache, then save to sources/.
+URL cache (mandatory):
+- Check [engram]/sources/url-cache/ before any fetch.
+- Key file as sha256(url)[:16].md (or a stable slug). First line: `url: …`
+- Hit → reuse; do not re-fetch. Miss → fetch once, write cache, then copy/link into sources/articles|transcripts as needed.
+- Log each helper use: |agent|helper|trigger|outcome|cache=hit|miss|n/a|notes| → PARITY-RUN.md
+
+Spine: if references/research/00-spine.md exists, read it first; do not re-deep-research its hubs unless this ledger is uniquely thin.
 
 If a helper fails, continue with fetch/browser/available tools and label the gap.
 Do not skip this ledger.
@@ -344,6 +380,8 @@ sources. Full blacklist + Chinese outlet allowlist:
 | Search tools down | Fetch / browser / installed research skills | Local-corpus-only |
 | <10 usable sources | Warn at 0.5; 2–3 models | Expand honest boundary |
 | Agent conflict | Keep it | Unresolved tensions |
+| Duplicate URL / re-deep-research | Reuse `url-cache/` + spine note | Re-spawn only the thin ledger |
+| Doctor blocker_fails > 0 | Walk wizards; re-doctor | Do not spawn |
 
 Prefer a labeled 60 to a fabricated 90.
 

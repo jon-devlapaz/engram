@@ -1,5 +1,14 @@
 # Changelog — Engram
 
+## 2.7.3 — Jung postmortem surgical process (2026-09-04)
+
+- Hard doctor gate: no Phase 1 spawn while `blocker_fails > 0`.
+- Mandatory url-cache write-on-miss (`sha256[:16].md`) + checklist mkdir.
+- Spine-first spawn (Agent 6 / optional `00-spine.md`) to cut duplicate
+  deep-research.
+- Normalized helper log schema in `PARITY-RUN.md`.
+- Optional I1 enrichment ask before deep gather when quote density matters.
+
 ## 2.7.2 — Gemini .env for doctor (2026-09-04)
 
 Doctor accepts `helpers/gemini-video/.env` (gitignored) for API key presence.
