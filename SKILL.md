@@ -155,6 +155,11 @@ happen. The folder must be self-contained.
 - [ ] If unique usable sources look like they will be <10: run the
       **obscure-person procedure** now (warn, 2–3 models, expand
       honest boundary). Surface this before Phase 4.
+- [ ] Nested helpers present: `helpers/{gemini-video,web-article-reader,agent-reach,deep-research,pdf}/SKILL.md`
+      (relative to this Engram pack). Record absolute pack path as
+      `ENGRAM_PACK=` for spawn prompts.
+- [ ] Read `references/info-gathering-skills.md` once; you will paste the
+      **Helper block** into every Phase 1 agent prompt (mandatory).
 
 ## Phase 1 — Six-agent corpus
 
@@ -185,7 +190,7 @@ happen. The folder must be self-contained.
 | Internal memo / decision log | `sources/articles/` | 05 decisions (never 07) |
 | User's own notes | `sources/articles/` | Secondary cross-check only, unless they are the subject |
 | Texture files (letters, messages, home recordings) | `sources/articles/` + `intimate: yes` after consent | 07 intimate only |
-| Raw audio / video | transcribe (via installed video-transcript skill per `references/info-gathering-skills.md`, else available tooling), then `sources/transcripts/` | 02, 03. No `sources/media/` |
+| Raw audio / video | Captions if YouTube (`scripts/download_subtitles.sh` + `srt_to_transcript.py`). Else open `helpers/gemini-video/SKILL.md` (needs `GEMINI_API_KEY`), write transcript to `sources/transcripts/` | 02, 03. No `sources/media/` |
 
 **Dry-run calibration (do not search):** a drop of `Foo.pdf` + `Bar.srt` →
 copy to `sources/books/Foo.pdf` and `sources/transcripts/Bar.srt`;
@@ -215,20 +220,68 @@ letters, messages, home recordings, relationship speech. Prefer empty
   `Inference`.
 - Keep contradictions. Prefer unresolved tension over smoothing.
 
-### Agent prompt (copy, fill the name)
+### Per-agent helper routing (mandatory)
+
+Before spawn, map each agent to helpers. Prefer the listed helpers over
+bare search snippets. Paths are under `ENGRAM_PACK` (this Engram install).
+
+| Agent | Ledger | Prefer these helpers / scripts |
+|---|---|---|
+| 1 Writings | `01-writings.md` | `helpers/pdf/SKILL.md` for user books/papers (I1); `helpers/web-article-reader/SKILL.md` for important essay URLs; `helpers/deep-research/SKILL.md` if this ledger is thin after a first pass |
+| 2 Conversations | `02-conversations.md` | YouTube: `scripts/download_subtitles.sh` then `srt_to_transcript.py`; local/no-caption video: `helpers/gemini-video/SKILL.md`; discover talks: `helpers/agent-reach/SKILL.md` |
+| 3 Expression | `03-expression-dna.md` | `helpers/agent-reach/SKILL.md` for X/Reddit/short platforms; `helpers/web-article-reader/SKILL.md` for long posts |
+| 4 External | `04-external-views.md` | `helpers/web-article-reader/SKILL.md` + `helpers/deep-research/SKILL.md` for criticism / biography threads |
+| 5 Decisions | `05-decisions.md` | `helpers/deep-research/SKILL.md` + `helpers/web-article-reader/SKILL.md` on filings, news, postmortems |
+| 6 Timeline | `06-timeline.md` | `helpers/deep-research/SKILL.md` for last-12-months sweep; article-reader on milestone URLs |
+
+**Rules:** Read the helper `SKILL.md` before first use in a run. Helper
+failure ≠ skip ledger — fall back (fetch / captions / available PDF tools)
+and note the gap in the ledger. I1 still binds for books/PDFs.
+
+### Agent prompt (copy, fill blanks — do not omit Helper block)
+
+Every Phase 1 spawn **must** include the Helper block verbatim (paths
+filled). Soft “helpers exist somewhere” is not enough.
 
 ```
-Your task: research [Name] for the [writings|conversations|…] ledger.
+Your task: research [Name] for the [writings|conversations|expression|external|decisions|timeline] ledger.
 
-Search toward: [use the Hunt column]
+Search toward: [paste Hunt column for this agent]
 
-Write to [engram]/references/research/[filename]
-Every item: URL or file path, and primary vs secondary.
+Write to [engram]/references/research/[01-writings|02-conversations|03-expression-dna|04-external-views|05-decisions|06-timeline].md
+Every item: URL or file path, primary vs secondary, and confidence.
 Keep contradictions. Prefer unresolved tension over reconciling them.
 
 Prefer first-party writing, recorded interviews, filings, and serious
 reporting. Skip quote-farm pages, Zhihu, WeChat public accounts, and
 Baidu Baike (see references/special-scenarios.md blacklist).
+
+## Helper block (mandatory — use when the trigger hits)
+ENGRAM_PACK=[absolute path to this Engram skill pack]
+
+Read and follow these SKILL.md files when their trigger applies:
+- [ENGRAM_PACK]/helpers/web-article-reader/SKILL.md
+  → important URL needs full article, not a search snippet
+  → save under [engram]/sources/articles/
+- [ENGRAM_PACK]/helpers/agent-reach/SKILL.md
+  → X / Reddit / YouTube / multi-platform fragments for this ledger
+- [ENGRAM_PACK]/helpers/deep-research/SKILL.md
+  → this ledger needs depth (structured incremental research), not spray
+  → write notes under [engram]/sources/articles/ (or the ledger file)
+- [ENGRAM_PACK]/helpers/gemini-video/SKILL.md
+  → local video with no captions (requires GEMINI_API_KEY)
+  → transcript → [engram]/sources/transcripts/
+- [ENGRAM_PACK]/helpers/pdf/SKILL.md
+  → user-supplied / otherwise legal PDF or doc only (I1)
+  → text/md → [engram]/sources/books/ or sources/articles/
+
+Engram pack scripts (YouTube captions — prefer before gemini-video):
+- bash [ENGRAM_PACK]/scripts/download_subtitles.sh <YouTube_URL> <out-dir>
+- python3 [ENGRAM_PACK]/scripts/srt_to_transcript.py <input.srt> <engram>/sources/transcripts/<name>.txt
+
+This agent’s preferred helpers: [paste row from Per-agent helper routing].
+If a helper fails, continue with fetch/browser/available tools and label the gap.
+Do not skip this ledger.
 ```
 
 ### Tools
@@ -248,12 +301,16 @@ first (English runtime).
 - Phase 1.5: `python3 scripts/merge_research.py <engram-dir>`
 - Phase 4: `python3 scripts/quality_check.py <engram-dir>/SKILL.md`
 
-#### Nested info-gathering skills
+#### Nested info-gathering skills (hard bind)
 
-Before spawning Phase 1 agents, read `references/info-gathering-skills.md`
-and open the matching `helpers/<job>/SKILL.md` (shipped in this pack).
-Tell subagents the helper paths. Missing/broken helper ≠ skip ledger;
-fall back and note the gap. I1 still binds.
+1. Read `references/info-gathering-skills.md` (routing + triggers).
+2. Set `ENGRAM_PACK` to this pack’s absolute path.
+3. Paste the **Helper block** into **every** Phase 1 agent prompt (see
+   template above). Do not spawn without it.
+4. Apply **Per-agent helper routing** so each ledger prefers the right
+   helpers.
+5. Helper missing/broken ≠ skip ledger; fall back and note the gap. I1
+   still binds.
 
 ### Source priority
 

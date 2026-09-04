@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Version** | 2.6.1 |
+| **Version** | 2.6.2 |
 | **License** | MIT (`LICENSE`) |
 
 ## Install
@@ -35,6 +35,8 @@ Shipped under `helpers/` — skill-within-skill:
 | `pdf` | PDF/DOCX/EPUB → markdown (MIT `huashu-md-html`) |
 
 See `helpers/README.md` and `helpers/THIRD_PARTY.md`.
+
+Phase 1 **hard-binds** these into every agent spawn (Helper block + per-agent routing in `SKILL.md` / `references/info-gathering-skills.md`).
 
 
 ## What ships in this pack

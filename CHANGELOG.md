@@ -1,5 +1,11 @@
 # Changelog — Engram
 
+## 2.6.2 — hard-bind Phase 1 helpers (2026-09-04)
+
+Mandatory Helper block in every Phase 1 agent prompt; per-agent helper
+routing table; pre-Phase-1 checklist for `ENGRAM_PACK` + helpers present.
+Reliable Nuwa-style “tell the swarm” with in-tree paths.
+
 ## 2.6.1 — English nested helpers (2026-09-04)
 
 Translated `deep-research`, `web-article-reader`, and `pdf` SKILL.md to
