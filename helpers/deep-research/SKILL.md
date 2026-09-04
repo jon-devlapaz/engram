@@ -1,102 +1,104 @@
 ---
 name: deep-research
-description: 结构化网络调研流程，确保调研成果增量保存到文件，不因会话截断丢失。当用户说"调研"、"搜索资料"、"帮我查一下"、"了解一下"、"最新信息"时使用此技能。
+description: >
+  Structured web research with incremental saves so findings survive
+  session truncation. Use when researching, looking something up,
+  gathering sources, or needing depth on one topic — not for writing
+  drafts. Upstream name: huashu-research.
 ---
 
-> Upstream name: `huashu-research`. Folder/job in Engram: `deep-research`.
+> Upstream: `huashu-research`. Engram job folder: `deep-research`.
+> When called from Engram Phase 1, write into the active engram directory
+> (e.g. `sources/articles/` or a research note under that engram), not a
+> random global `_knowledge_base/` unless the user asks otherwise.
 
-# 调研 Skill
+# Deep research
 
-结构化的网络调研流程，核心目标：调研成果实时持久化，防止会话截断丢失工作。
+Structured web research. Core goal: persist findings to disk in real time
+so work is not lost when the session truncates.
 
-## 何时使用
+## When to use
 
-- 为写文章做前期调研
-- 了解新产品、新技术、新发布
-- 搜集竞品信息或行业动态
-- 任何需要多次 WebSearch 的信息搜索任务
+- Pre-writing research for an article or distill ledger
+- Learning a new product, technology, or release
+- Competitor or industry scan
+- Any task that needs multiple web searches
 
-## 执行流程
+## Procedure
 
-### Step 1: 立即创建调研文件
-- 在开始搜索之前，先创建文件
-- 路径：`_knowledge_base/research-<主题>-<YYYYMMDD>.md`
-- 初始内容包含：调研目标、关键问题、预期输出
+### Step 1: Create the research file first
 
-```markdown
-# [主题] 调研笔记
-
-调研日期：YYYY-MM-DD
-调研目标：[一句话说明]
-
-## 关键问题
-1. [问题1]
-2. [问题2]
-3. [问题3]
-
-## 发现
-
-（调研中逐步填充）
-
-## 来源列表
-
-（每次搜索后追加）
-```
-
-### Step 2: 搜索并增量保存
-- 每次 WebSearch 后，立即将发现追加到文件
-- 每条发现附上来源 URL 和日期
-- 遵循信息源优先级（见 SHARED-RULES.md）
-
-### Step 3: 阶段摘要
-- 每完成3次搜索，在文件中保存一次「阶段摘要」
-- 格式：`### 阶段摘要 (第N轮)` + 当前关键发现
-
-### Step 4: 最终简报
-调研结束时，整理文件为结构化简报：
+- Create the file **before** the first search
+- Default path (standalone): `_knowledge_base/research-<topic>-<YYYYMMDD>.md`
+- Engram Phase 1 path: `<engram-dir>/sources/articles/research-<topic>-<YYYYMMDD>.md`
+  (or the ledger the caller named)
+- Seed with: goal, key questions, expected output
 
 ```markdown
-## 调研结论
+# [Topic] research notes
 
-### 关键事实
-1. [事实1]（来源：URL）
-2. [事实2]（来源：URL）
+Date: YYYY-MM-DD
+Goal: [one sentence]
 
-### 来源列表
-| 来源 | URL | 发布日期 | 可信度 |
-|------|-----|---------|--------|
-| ... | ... | ... | 高/中/低 |
+## Key questions
+1. [Q1]
+2. [Q2]
+3. [Q3]
 
-### 待确认问题
-- [还需要进一步验证的点]
+## Findings
 
-### 写作建议
-- [基于调研结果，对后续写作的建议]
+(fill incrementally)
+
+## Sources
+
+(append after every search)
 ```
 
-## 关键原则
+### Step 2: Search and save incrementally
 
-- **先建文件再搜索**：确保第一次搜索结果就被保存
-- **增量保存不等到最后**：每次搜索后立即追加
-- **调研和写作分离**：本 Skill 只做调研，不开始写草稿
-- **标注可信度**：区分一手信息（官方）和二手信息（媒体/社区）
-- **忽略过时信息源**：知乎/百度（2025年前）、营销软文
+- After every WebSearch (or equivalent), append findings immediately
+- Each finding includes source URL and date
+- Prefer primary / official sources over secondary paraphrase
 
-## 与其他 Skill 的关系
+### Step 3: Stage summaries
 
-- 调研完成后，用户可触发 /选题生成 来确定写作方向
-- 调研文件将作为后续写作的输入素材
-- 如果调研中发现的信息适合长期留存，保存到对应的 _knowledge_base 分类目录
+- Every 3 searches, write a stage summary into the file
+- Format: `### Stage summary (round N)` + current key findings
 
-## 输出位置
+### Step 4: Final briefing
 
-- 调研笔记：`_knowledge_base/research-<主题>-<YYYYMMDD>.md`
-- 长期知识：`_knowledge_base/<分类>/<主题>-<YYYYMM>.md`
+At the end, structure the file as a briefing:
 
-**最后更新**: 2026-02-06
+```markdown
+## Research conclusions
 
----
+### Key facts
+1. [Fact 1] (source: URL)
+2. [Fact 2] (source: URL)
 
-> **花叔出品** | AI Native Coder · 独立开发者
-> 公众号「花叔」| 30万+粉丝 | AI工具与效率提升
-> 代表作：小猫补光灯（AppStore付费榜Top1）·《一本书玩转DeepSeek》
+### Source table
+| Source | URL | Published | Credibility |
+|--------|-----|-----------|-------------|
+| ... | ... | ... | high/med/low |
+
+### Open questions
+- [What still needs verification]
+
+### Next steps for the caller
+- [How Engram / writing should use this]
+```
+
+## Principles
+
+- **File before search** — first result must already have a place to land
+- **Incremental save** — never wait until the end
+- **Research ≠ writing** — this skill gathers; it does not draft the article/skill
+- **Label credibility** — primary (official) vs secondary (media/community)
+- **Skip weak sources** — marketing fluff; unverifiable quote farms
+
+## Outputs
+
+- Research notes: path above
+- Optional long-term keep: only if the user asks
+
+**Upstream last update noted:** 2026-02-06

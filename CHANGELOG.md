@@ -1,5 +1,12 @@
 # Changelog — Engram
 
+## 2.6.1 — English nested helpers (2026-09-04)
+
+Translated `deep-research`, `web-article-reader`, and `pdf` SKILL.md to
+English; Chinese originals kept as `SKILL.zh.md`. Quality gates: CJK < 2%,
+heading/script parity, Engram path adaptations (no force ZH translation,
+I1 on pdf).
+
 ## 2.6.0 — nested Phase-1 helpers (2026-09-04)
 
 Vendored real helper skills under `helpers/` (skill-within-skill):

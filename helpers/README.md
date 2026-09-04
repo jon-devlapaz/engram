@@ -15,3 +15,9 @@ Each folder is a skill (`SKILL.md`). Phase 1 opens `helpers/<job>/SKILL.md` — 
 Anthropic’s proprietary document `pdf` skill is **not** included (redistribution forbidden).
 
 See each `SOURCE.md` and `THIRD_PARTY.md`.
+
+## Language
+
+Procedure files (`SKILL.md`) are **English**. Where an upstream was Chinese,
+the original is kept as `SKILL.zh.md` for provenance. Research corpus may
+still be multilingual; helper *instructions* stay English for Engram.
