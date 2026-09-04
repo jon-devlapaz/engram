@@ -286,6 +286,9 @@ Engram pack scripts (YouTube captions — prefer before gemini-video):
 - python3 [ENGRAM_PACK]/scripts/srt_to_transcript.py <input.srt> <engram>/sources/transcripts/<name>.txt
 
 This agent’s preferred helpers: [paste row from Per-agent helper routing].
+URL cache: check [engram]/sources/url-cache/ before fetching.
+If hit, reuse. If miss, fetch once, write cache, then save to sources/.
+
 If a helper fails, continue with fetch/browser/available tools and label the gap.
 Do not skip this ledger.
 ```

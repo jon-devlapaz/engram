@@ -1,5 +1,9 @@
 # Changelog — Engram
 
+## 2.7.1 — URL cache in Helper block (2026-09-04)
+
+enable-url-cache wired into Helper block + pre-Phase-1 checklist.
+
 ## 2.7.0 — preflight doctor + troubleshooting wizards (2026-09-04)
 
 `scripts/engram_doctor.py` checks nested helpers, pack scripts, and host
