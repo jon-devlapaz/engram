@@ -1,0 +1,15 @@
+.DS_Store
+**/.DS_Store
+*.pyc
+__pycache__/
+.Python
+.venv/
+venv/
+.env
+.env.*
+*.log
+.idea/
+.vscode/
+*.swp
+*~
+.tink-tmp/
