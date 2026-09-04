@@ -50,8 +50,7 @@ that phase starts.
 - Tier: **standard** unless they pick fast or deep.
 - Public figure + no extra detail: public corpus, disclosed sim.
 - Private figure: halt for consent and corpus.
-- No pirate libraries (no Z-Library, LibGen, or equivalent). User-supplied
-  books and legal access only (I1).
+- Books: user-supplied files or otherwise legal access only (I1).
 
 Proceed on Phase 0 clarifying questions that have defaults.
 Halt on consent, deception, and a CTT claim with no intimate sources.
@@ -163,7 +162,7 @@ happen. The folder must be self-contained.
 
 | Mode | Trigger | Strategy |
 |---|---|---|
-| **pure-web** (default) | No user files | All six agents search the public web. Books they need must be user-supplied or legally available — never pirate libraries |
+| **pure-web** (default) | No user files | All six agents search the public web. Books they need must be user-supplied or otherwise legally available |
 | **local-first** | User dropped PDFs, transcripts, captions, exports | Run the four-step local-first procedure. Web fills *gaps only* |
 | **pure-local** | User said "only use what I gave you" or the subject is a private person with a supplied corpus | No web. Six agents read `sources/` only. Thin ledgers stay thin and get labeled |
 
@@ -240,8 +239,7 @@ an absolute path to that `scripts/` folder). Prefer English captions
 first (English runtime).
 
 - **Books:** copy user-supplied or legally obtained files into
-  `sources/books/` and read them. No pirate libraries (Z-Library,
-  LibGen, or equivalent). Refused (intentional cut I1). If a book is needed and not supplied, leave ledger 01 thin
+  `sources/books/` and read them. User-supplied or otherwise legal access only (I1). If a book is needed and not supplied, leave ledger 01 thin
   and say so.
 - **Captions:** `bash scripts/download_subtitles.sh <YouTube_URL> <out-dir>`
   then `python3 scripts/srt_to_transcript.py <input.srt> <sources/transcripts/…>`
@@ -470,7 +468,7 @@ Core ten, then Engram extras. Each row is a veto, not a vibe.
 | 8 | Distill a living private person without a boundary | User-supplied corpus + consent |
 | 9 | Ship without anti-drift | Role-play rules + expression DNA in the template must survive edits |
 | 10 | Turn checkpoints into delivery blocks | Phase 0 gets defaults. 1.5 and 2.5 pause unless `waiver: run-through` |
-| 11 | Pirate book download (Z-Library / LibGen / equivalent) | Intentional cut I1. User-supplied or legal copies only |
+| 11 | Unauthorized book acquisition | Intentional cut I1. User-supplied or legal copies only |
 | 12 | Write to `.claude/skills/` | I2. Write only under `~/.tink/skills/engrams/<slug>/` |
 | 13 | Edit this distiller mid-run without a version bump | Treat the pack as read-stable during a distill; change it between runs |
 | 14 | Deceptive Character Turing Test | Informed CTT only / no deceptive relative tests |

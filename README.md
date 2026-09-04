@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Version** | 2.5.3 |
+| **Version** | 2.5.4 |
 | **License** | MIT (`LICENSE`) |
 
 ## Install
@@ -34,7 +34,7 @@ LICENSE VERSION CHANGELOG.md README.md
 
 | ID | Cut |
 |---|---|
-| I1 | No pirate book download (Z-Library / LibGen) — legal sources / user files only |
+| I1 | Books only from user-supplied or otherwise legal access |
 | I2 | Write path `engrams/<slug>/` |
 | I3 | Engram attribution on shipped person-skills |
 | I4 | Non-git version-check skip when the install is not a clone |
@@ -46,4 +46,4 @@ LICENSE VERSION CHANGELOG.md README.md
 
 ## Contributing
 
-Prefer process fixes with receipts. Keep intentional cuts documented. Do not reintroduce pirate ingest.
+Prefer process fixes with receipts. Keep intentional cuts documented.

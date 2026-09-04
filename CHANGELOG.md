@@ -1,5 +1,10 @@
 # Changelog — Engram
 
+## 2.5.4 — source-policy wording (2026-09-04)
+
+I1 stated as user-supplied / legal access only — without naming banned
+sites.
+
 ## 2.5.3 — standalone voice (2026-09-04)
 
 Removed third-party / upstream naming from the skill pack. Engram stands
