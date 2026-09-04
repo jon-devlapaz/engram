@@ -2,7 +2,7 @@
 
 ## 2.5.5 — machine-agnostic paths (2026-09-04)
 
-Replaced host-specific `~/.tink/skills/…` paths with `<skills-root>/…`.
+Replaced host-specific skills-home paths with `<skills-root>/…`.
 
 ## 2.5.4 — source-policy wording (2026-09-04)
 
