@@ -4,7 +4,7 @@ Ship a self-contained directory. Research filenames are fixed so the
 six-agent pass is interchangeable.
 
 ```
-~/.tink/skills/engrams/<slug>/
+<skills-root>/engrams/<slug>/
   SKILL.md                 # filled from skill-template.md
   CONSTITUTION.md          # copy of distiller invariants
   MIND.md                  # compact models + heuristics

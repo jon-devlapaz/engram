@@ -1,6 +1,6 @@
 # Named info-gathering skills
 
-Before spawning Phase 1 agents, list `~/.tink/skills/` (top level and
+Before spawning Phase 1 agents, list `<skills-root>/` (top level and
 skillset folders). Match by **job**, not nostalgia for Claude paths.
 Tell each subagent the names that actually exist. A missing row means
 that helper is unavailable — still complete the ledger; still refuse

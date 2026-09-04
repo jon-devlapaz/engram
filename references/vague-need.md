@@ -34,8 +34,8 @@ decision). One round to locate the row, then recommend.
 
 ### Step 3: recommend 2–3 candidates
 
-**Source A — already installed.** Scan `~/.tink/skills/engrams/` and
-`~/.tink/skills/personas-skillset/`. Read each SKILL.md description.
+**Source A — already installed.** Scan `<skills-root>/engrams/` and
+`<skills-root>/personas-skillset/`. Read each SKILL.md description.
 A match that already exists is cheaper than a new distill. Empty scan
 → skip to B.
 

@@ -26,7 +26,7 @@ Procedures, not slogans. Use the matching one as soon as it applies
 ## Topic skill vs person engram
 
 Input is a field ("value investing", "product restraint"), not a name.
-Write to `~/.tink/skills/engrams/<topic>-framework/`. Same tree. Variants:
+Write to `<skills-root>/engrams/<topic>-framework/`. Same tree. Variants:
 
 | Phase | Person engram | Topic-skill variant |
 |---|---|---|

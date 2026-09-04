@@ -46,7 +46,7 @@ that phase starts.
   asked (see `references/optional-immersion.md`). Prefer writings,
   models, heuristics, and real stakes.
 - English runtime. Sources stay in their original language.
-- Write only under `~/.tink/skills/engrams/<slug>/`.
+- Write only under `<skills-root>/engrams/<slug>/`.
 - Tier: **standard** unless they pick fast or deep.
 - Public figure + no extra detail: public corpus, disclosed sim.
 - Private figure: halt for consent and corpus.
@@ -71,8 +71,8 @@ Phase 0 entry:
    Default is **mind only**. Solicit intimate drops only when they asked
    for immersion, CTT, or texture. Stage 8 (stakes) is a post-mind gate,
    not an intimate drop.
-4. New vs update (scan `~/.tink/skills/engrams/` and
-   `~/.tink/skills/personas-skillset/`).
+4. New vs update (scan `<skills-root>/engrams/` and
+   `<skills-root>/personas-skillset/`).
 5. **Resource drop** (enrichment first). Ask for primary files that
    strengthen the **mind** (books, essays, transcripts, decision memos).
    Classify with the **File type → ledger** table in Phase 1; keep one map.
@@ -134,7 +134,7 @@ ledger inside the engram folder. Research that is not a file did not
 happen. The folder must be self-contained.
 
 **Completion checklist (run before Phase 1):**
-- [ ] Directory exists at `~/.tink/skills/engrams/<slug>/` with
+- [ ] Directory exists at `<skills-root>/engrams/<slug>/` with
       `references/research/` and `sources/{books,transcripts,articles}/`
 - [ ] `CONSTITUTION.md` copied in
 - [ ] If this is an update: existing SKILL.md read; stale slices marked
@@ -250,7 +250,7 @@ first (English runtime).
 
 #### Named info-gathering skills
 
-Before spawning Phase 1 agents, scan `~/.tink/skills/` and follow
+Before spawning Phase 1 agents, scan `<skills-root>/` and follow
 `references/info-gathering-skills.md` (match by job; missing helper ≠ skip ledger).
 
 ### Source priority
@@ -356,7 +356,7 @@ Also:
 - One-time disclosure, then stay in character for immersion.
 - Walk the quality self-check at the end of `references/extraction-framework.md`.
   Mark misses and return to the matching phase.
-- Write the finished SKILL.md to `~/.tink/skills/engrams/<slug>/SKILL.md`.
+- Write the finished SKILL.md to `<skills-root>/engrams/<slug>/SKILL.md`.
 
 ### Phase 3 ship checklist
 
@@ -469,7 +469,7 @@ Core ten, then Engram extras. Each row is a veto, not a vibe.
 | 9 | Ship without anti-drift | Role-play rules + expression DNA in the template must survive edits |
 | 10 | Turn checkpoints into delivery blocks | Phase 0 gets defaults. 1.5 and 2.5 pause unless `waiver: run-through` |
 | 11 | Unauthorized book acquisition | Intentional cut I1. User-supplied or legal copies only |
-| 12 | Write to `.claude/skills/` | I2. Write only under `~/.tink/skills/engrams/<slug>/` |
+| 12 | Write to `.claude/skills/` | I2. Write only under `<skills-root>/engrams/<slug>/` |
 | 13 | Edit this distiller mid-run without a version bump | Treat the pack as read-stable during a distill; change it between runs |
 | 14 | Deceptive Character Turing Test | Informed CTT only / no deceptive relative tests |
 | 15 | Fill childhood / grief from prior or "texture" | Unrecorded when no MEMORY trace (false-memory veto) |
@@ -517,7 +517,7 @@ user-supplied, informed CTT, empty 07 fine).
 
 ## Done
 
-Self-contained `~/.tink/skills/engrams/<slug>/`: ledgers 01–06,
+Self-contained `<skills-root>/engrams/<slug>/`: ledgers 01–06,
 template-complete SKILL.md, `FIDELITY.md`, `quality_check.py` PASS,
 ceiling **mind** by default; writes confined to that folder (+ this chat).
 Mind ships at G7; Stage 8 (stakes) is the next hill. Immersion / CTT

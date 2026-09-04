@@ -4,12 +4,14 @@
 
 | | |
 |---|---|
-| **Version** | 2.5.4 |
+| **Version** | 2.5.5 |
 | **License** | MIT (`LICENSE`) |
 
 ## Install
 
-Place this tree where your agent loads skills (example: `~/.tink/skills/engram/`).
+Place this tree where your agent loads skills (example: `<skills-root>/engram/`).
+
+`<skills-root>` is your agent's skills directory — whatever path that is on the host. Engram never assumes a vendor home folder.
 
 1. Read `CONSTITUTION.md`, then `SKILL.md`.
 2. Open `references/` files as the phase table in `SKILL.md` directs.

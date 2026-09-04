@@ -103,7 +103,7 @@ Fill is fraud.
 8. **English runtime, original-language sources.** The skill and the
    shipped engram are English. Primary sources stay in the language
    they were made in. Do not translate a joke into a different person.
-9. **Write path.** New engrams land in `~/.tink/skills/engrams/<slug>/`.
+9. **Write path.** New engrams land in `<skills-root>/engrams/<slug>/`.
    Never write to `~/.claude/skills/`. Write person-skills under `engrams/<slug>/` only.
 10. **Kill.** If the false-memory probe fails, if the sim impersonates
     without disclosure, or if a CTT is proposed as a deception, stop
