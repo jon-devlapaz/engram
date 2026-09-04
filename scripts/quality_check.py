@@ -13,6 +13,36 @@ import sys
 from pathlib import Path
 
 
+HINTS = {
+    "frontmatter description": (
+        "hint: keep description ≤1024 chars (soft ~300)"
+    ),
+    "mental model count": (
+        "hint: need `## … Mental model…` with 3–7 "
+        "`### Model N` (or `### Mental model N`) headings"
+    ),
+    "model limitations": (
+        "hint: include limit/fail/blind spot language near models"
+    ),
+    "expression DNA": (
+        "hint: need `## Expression DNA` (or voice rules) with ≥3 of: "
+        "sentence, vocabulary, humor, pacing, certainty, citation…"
+    ),
+    "honest boundary": (
+        "hint: need `## Honest boundary` then ≥3 `-` or `1.` list items"
+    ),
+    "tensions": (
+        "hint: need ≥2 of tension/paradox/contradiction/unsettled…"
+    ),
+    "primary sources": (
+        "hint: under `## Sources`, use `### Primary` / `### Secondary` "
+        "bullets with primary >50%"
+    ),
+    "memory store": (
+        "hint: MEMORY.md autobiographical claims need `### TRACE-…` traces"
+    ),
+}
+
 
 def check_frontmatter_description(content: str) -> tuple[bool, str]:
     """Hard fail if description >1024 chars; note if >400 (still PASS)."""
@@ -271,10 +301,15 @@ def main(argv: list[str] | None = None) -> int:
     for name, fn in checks:
         ok, detail = fn(content)
         print(f"  {name:<22} {'PASS' if ok else 'FAIL'}  {detail}")
+        if not ok and name in HINTS:
+            print(f"    {HINTS[name]}")
         if ok:
             passed_count += 1
     ok_m, detail_m = check_memory_file(skill_path)
-    print(f"  {'memory store':<22} {'PASS' if ok_m else 'FAIL'}  {detail_m}")
+    mem_name = "memory store"
+    print(f"  {mem_name:<22} {'PASS' if ok_m else 'FAIL'}  {detail_m}")
+    if not ok_m and mem_name in HINTS:
+        print(f"    {HINTS[mem_name]}")
     if ok_m:
         passed_count += 1
     total = len(checks) + 1

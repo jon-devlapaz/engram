@@ -1,5 +1,14 @@
 # Changelog — Engram
 
+## 2.7.8 — smoke fixture + quality hints (2026-09-04)
+
+- Add `examples/minimal-fixture/` (fake engram) + `scripts/test_smoke.py`
+  for deterministic pack regression (quality_check → merge_research →
+  doctor → phase1_gate → ax_gate).
+- `quality_check.py`: one short `hint:` line on FAIL (format/structure only).
+- Philosophy: scripts own deterministic structure; agents own judgment
+  (fidelity-scorecard / Stage 8 / synthesis stay out of smoke).
+
 ## 2.7.7 — quality_check Sources heading swallow (2026-09-04)
 
 - Fix greedy `re.DOTALL` + `Source` matching inside URLs like `.../resources/...`

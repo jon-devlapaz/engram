@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Version** | 2.7.7 |
+| **Version** | 2.7.8 |
 | **License** | MIT (`LICENSE`) |
 
 ## Happy path
@@ -29,6 +29,7 @@ python3 scripts/phase1_gate.py --engram path/to/engrams/<slug>
 python3 scripts/ax_gate.py --engram path/to/engrams/<slug>
 python3 scripts/merge_research.py --engram path/to/engrams/<slug>
 python3 scripts/quality_check.py --engram path/to/engrams/<slug>
+python3 scripts/test_smoke.py   # pack regression vs examples/minimal-fixture
 ```
 
 ## Nested helpers (Phase 1)
@@ -56,7 +57,8 @@ SKILL.md            # Distiller
 CONSTITUTION.md     # Non-negotiables
 helpers/            # Nested Phase-1 skills (video, article, reach, research, pdf, doctor)
 references/         # Phase refs (template, scorecard, scenarios, …)
-scripts/            # doctor, phase1_gate, ax_gate, merge_research, quality_check, captions
+scripts/            # doctor, phase1_gate, ax_gate, merge_research, quality_check, test_smoke, captions
+examples/           # minimal-fixture (smoke / onboarding — not a real subject)
 LICENSE VERSION CHANGELOG.md README.md
 ```
 

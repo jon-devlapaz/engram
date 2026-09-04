@@ -572,6 +572,7 @@ fabricate from training data. Required in `skill-template.md`; do not drop it.
 7. Update `STATUS.md` (fidelity). Emit an **AX beat** after Phase 4
    (template in `references/ax-ops.md`). Re-run
    `python3 scripts/ax_gate.py --engram <dir>` before calling Done.
+8. Pack regression (maintainers): `python3 scripts/test_smoke.py`.
 
 Informed CTT only / no deceptive relative tests: run CTT only if they
 name an evaluator and 07 exists.

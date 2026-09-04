@@ -1,6 +1,6 @@
 # Happy-path agentic bootstrap
 
-Lean contract for **distill `<name>`** on Engram **2.7.6+**. The agent
+Lean contract for **distill `<name>`** on Engram **2.7.8+**. The agent
 owns scripts and the tree; the user consents only for (a) **host installs**
 and (b) **checkpoints 1.5 / 2.5** with verbs **approve | revise | stop**.
 
@@ -45,3 +45,12 @@ Checkpoint 1.5|2.5 — approve | revise | stop
 ```
 
 Dismiss/skip ≠ approve. Bare "proceed" is not approve unless the phase is named.
+
+## Gates: deterministic vs judgment
+
+| Kind | Examples | Owner |
+|---|---|---|
+| Deterministic | `quality_check`, `merge_research`, `engram_doctor`, `phase1_gate`, `ax_gate`, `test_smoke` | Scripts |
+| Judgment | fidelity-scorecard, Stage 8 stakes, synthesis quality | Agent |
+
+Scripts assert structure; agents own taste. Smoke uses `examples/minimal-fixture/` only.
