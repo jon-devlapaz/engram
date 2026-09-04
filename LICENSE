@@ -19,17 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-## Upstream acknowledgment
-
-Engram is an English, purist *process* fork of [Nuwa (女娲.skill)](https://github.com/alchaincyf/nuwa-skill)
-by Huashu (花叔), also MIT-licensed. The empirical pipeline shape (six
-research agents, triple-verified models, expression DNA, dual-agent
-fidelity scorecard, companion scripts) follows Nuwa. Engram does not
-claim Nuwa endorsement. Do not mutate upstream Nuwa when using this fork.
-
-Intentional Engram cuts vs Nuwa include: no pirate book download (Z-Library /
-LibGen); write path under `engrams/<slug>/`; Engram attribution (not the
-Nuwa creator block); non-git version-check skip when the install is not a clone.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phase 4 mechanical QA. Port of Nuwa scripts/quality_check.py.
+"""Phase 4 mechanical QA.
 
     python3 quality_check.py <path-to-SKILL.md>
 """

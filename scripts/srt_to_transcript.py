@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Clean SRT/VTT to readable transcript. Port of Nuwa scripts/srt_to_transcript.py.
+"""Clean SRT/VTT to readable transcript.
 
     python3 srt_to_transcript.py input.srt [output.txt]
 """

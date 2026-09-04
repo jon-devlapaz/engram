@@ -1,5 +1,5 @@
 #!/bin/bash
-# Download YouTube subtitles. Port of Nuwa scripts/download_subtitles.sh.
+# Download YouTube subtitles.
 # Usage: ./download_subtitles.sh <YouTube_URL> [output-dir]
 # Prefer manual subs. Language order: English, then Chinese, then whatever exists.
 # Do not use this to fetch private / unlisted intimate recordings without consent.

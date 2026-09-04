@@ -6,9 +6,8 @@
 > near chance. Iron rule: **answering agent and scoring agent are two
 > independent agents. Never self-score.**
 >
-> English port of Nuwa's `references/fidelity-scorecard.md`. The five
-> dimensions and weights are unchanged. Engram adds a **ship veto**
-> after the 100-point score; it does not replace it.
+> Five-dimension fidelity scorecard. Engram adds a **ship veto** after
+> the 100-point score; it does not replace it.
 
 ## Five dimensions (100)
 

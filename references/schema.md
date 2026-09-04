@@ -1,6 +1,6 @@
 # Engram schema
 
-Ship a self-contained directory. Research filenames match Nuwa so the
+Ship a self-contained directory. Research filenames are fixed so the
 six-agent pass is interchangeable.
 
 ```

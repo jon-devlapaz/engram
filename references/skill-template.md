@@ -1,10 +1,8 @@
 # Person-engram SKILL.md template
 
-Read and fill this in Phase 3. It is the English port of Nuwa's
-`references/skill-template.md`. Structural parity is required: every
-section below must exist in the shipped runtime skill. Engram extras
-(MEMORY.md retrieval, PERSON/RELATIONSHIPS files) are additional, not
-replacements.
+Read and fill this in Phase 3. Every section below must exist in the
+shipped runtime skill. Engram extras (MEMORY.md retrieval,
+PERSON/RELATIONSHIPS files) are additional, not replacements.
 
 **Frontmatter cap:** keep `description` near ~300 characters. Hard fail
 at the skill-loader ~1024 character ceiling. Name + exclusive triggers,
@@ -237,8 +235,7 @@ for source transparency.
 
 ---
 
-> Distilled with [Engram](https://github.com/jon-devlapaz/engram),
-> an English process fork of [Nuwa](https://github.com/alchaincyf/nuwa-skill).
+> Distilled with [Engram](https://github.com/jon-devlapaz/engram).
 > Not the person.
 ```
 

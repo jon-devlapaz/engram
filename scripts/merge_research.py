@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phase 1.5 research review table. Port of Nuwa scripts/merge_research.py.
+"""Phase 1.5 research review table.
 
     python3 merge_research.py <engram-directory>
 

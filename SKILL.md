@@ -14,21 +14,20 @@ Read `CONSTITUTION.md` first. If a step would violate it, stop.
 **Mind-first · stakes · pure-web / local-first · Unrecorded.** Default
 product is a thinking advisor. Policy for mind-first and Stage 8 lives
 in **Defaults** and **Stage 8** once — follow those, do not restate here.
-Memory is additive and admission-gated. English, purist process fork of
-Nuwa (pipeline parity); Nuwa itself stays read-only.
+Memory is additive and admission-gated.
 
 **Required reading, in order, when you reach that phase:**
 
 | Phase | File | Why |
 |---|---|---|
-| 0.5 | `references/schema.md` | Directory layout (Nuwa filenames) |
+| 0.5 | `references/schema.md` | Directory layout (01–06 ledgers) |
 | 1 | this file, agent table | Six research agents |
 | 0B | `references/vague-need.md` | No-name demand → candidate cards |
 | 1 / scenarios | `references/special-scenarios.md` | Living/historical, China allowlist, obscure, self-distill |
 | 1 / tools | `references/info-gathering-skills.md` | Optional helper skills by job |
 | 1.5 | `scripts/merge_research.py` | Empirical review table |
 | 2 | `references/extraction-framework.md` | Triple verification, DNA, contradictions |
-| 3 | `references/skill-template.md` | Runtime skeleton (parity with Nuwa) |
+| 3 | `references/skill-template.md` | Runtime skeleton |
 | 3 | `references/agentic-protocol.md` | Derive Step-2 tracks; calibration; Step-3 packaging |
 | 4 | `scripts/quality_check.py` then `references/fidelity-scorecard.md` | Mechanical QA + independent scorecard |
 | 8 / opt-in | `references/optional-immersion.md` | Immersion / CTT only when asked |
@@ -46,14 +45,13 @@ that phase starts.
   pathos. Soft immersion / persona texture / CTT stays **off** unless
   asked (see `references/optional-immersion.md`). Prefer writings,
   models, heuristics, and real stakes.
-- Never edit `huashu-nuwa`.
 - English runtime. Sources stay in their original language.
 - Write only under `~/.tink/skills/engrams/<slug>/`.
 - Tier: **standard** unless they pick fast or deep.
 - Public figure + no extra detail: public corpus, disclosed sim.
 - Private figure: halt for consent and corpus.
 - No pirate libraries (no Z-Library, LibGen, or equivalent). User-supplied
-  books and legal access only. That is the one Nuwa tool step we refuse (I1).
+  books and legal access only (I1).
 
 Proceed on Phase 0 clarifying questions that have defaults.
 Halt on consent, deception, and a CTT claim with no intimate sources.
@@ -66,7 +64,7 @@ through", "don't stop at checkpoints", or "skip the gates"). Record
 
 ## Phase 0 — Eligibility and clarifying
 
-Same as Nuwa Phase 0A/0B, in English:
+Phase 0 entry:
 
 1. Who is the person (confirm identity).
 2. Full portrait vs one dimension.
@@ -94,11 +92,11 @@ Same as Nuwa Phase 0A/0B, in English:
 | Tier | Scale | When |
 |---|---|---|
 | Fast | Writings + conversations + expression, cap ~5 sources each | Smoke test |
-| Standard (default) | All six Nuwa dimensions | Most work |
+| Standard (default) | All six research dimensions | Most work |
 | Deep | Six dimensions + full ingest of user primaries (+ 07 only if immersion asked + supplied) | Release-quality mind; immersion/CTT only if requested |
 
 **Before spawning agents, confirm the tier and state the cost magnitude.** A full standard distill is a long
-multi-agent research job — Nuwa's disclosed anchor is tens of dollars on a top model (real user case); fast runs
+multi-agent research job — full standard runs can cost on the order of tens of dollars on a top model; fast runs
 about 1/3 of standard, deep costs the most. Fast is the cheap smoke test. Deep is for a
 release-quality engram with a full primary ingest. Name the tier and its magnitude before spending.
 Start the swarm only after the tier is named (default:
@@ -159,7 +157,7 @@ happen. The folder must be self-contained.
       **obscure-person procedure** now (warn, 2–3 models, expand
       honest boundary). Surface this before Phase 4.
 
-## Phase 1 — Six-agent corpus (Nuwa parity)
+## Phase 1 — Six-agent corpus
 
 ### Acquisition mode (pick one, write it down)
 
@@ -196,7 +194,7 @@ mode = local-first; PDF feeds 01+03; SRT feeds 02+03; spawn web only
 for 04, 05, 06 (and 01–03 if those files are too thin after reading).
 
 Spawn six parallel agents when the runtime allows; otherwise run them
-in series and save after each. Same split as Nuwa:
+in series and save after each. Same six-way split:
 
 | Agent | File | Hunt | Extract |
 |---|---|---|---|
@@ -211,7 +209,7 @@ in series and save after each. Same split as Nuwa:
 letters, messages, home recordings, relationship speech. Prefer empty
 07 over scraping private accounts. Empty = public texture only.
 
-### Hard rules for every agent (Nuwa)
+### Hard rules for every agent
 
 - Write `references/research/0N-*.md` inside the engram folder.
 - Every item: locator + confidence. `Subject said` vs `Witness said` vs
@@ -234,18 +232,16 @@ reporting. Skip quote-farm pages, Zhihu, WeChat public accounts, and
 Baidu Baike (see references/special-scenarios.md blacklist).
 ```
 
-### Tools (same jobs as Nuwa)
+### Tools
 
 Scripts live in **this pack** (`scripts/` in this pack), not inside each
 output engram. Invoke them from this skill directory (or with
-an absolute path to that `scripts/` folder). Engram prefers English
-captions first (English runtime); Nuwa prefers Chinese first — same
-job, intentional language order.
+an absolute path to that `scripts/` folder). Prefer English captions
+first (English runtime).
 
 - **Books:** copy user-supplied or legally obtained files into
   `sources/books/` and read them. No pirate libraries (Z-Library,
-  LibGen, or equivalent). That Nuwa tool step is refused (intentional
-  cut I1). If a book is needed and not supplied, leave ledger 01 thin
+  LibGen, or equivalent). Refused (intentional cut I1). If a book is needed and not supplied, leave ledger 01 thin
   and say so.
 - **Captions:** `bash scripts/download_subtitles.sh <YouTube_URL> <out-dir>`
   then `python3 scripts/srt_to_transcript.py <input.srt> <sources/transcripts/…>`
@@ -259,7 +255,7 @@ job, intentional language order.
 Before spawning Phase 1 agents, scan `~/.tink/skills/` and follow
 `references/info-gathering-skills.md` (match by job; missing helper ≠ skip ledger).
 
-### Source priority (Nuwa)
+### Source priority
 
 User primary > own long form > long interviews > dated actions >
 social fragments > other people's analysis. Secondary paraphrase is
@@ -271,7 +267,7 @@ Zhihu / WeChat public accounts / Baidu Baike / quote farms — never as
 sources. Full blacklist + Chinese outlet allowlist:
 `references/special-scenarios.md` (China vs West).
 
-### Failure table (Nuwa, kept)
+### Failure table
 
 | Trigger | First fix | Then |
 |---|---|---|
@@ -352,7 +348,7 @@ Fill the template skeleton; keep structural parity.
 | Lineage | Phase 2.5 |
 | Honest boundary | Phase 2.6 + cutoff date |
 | Sources | Six agents, primary vs secondary |
-| Attribution | Engram fork line (I3), not 花叔 |
+| Attribution | Engram line (I3) |
 | Peer curiosity | Scan personas-skillset + engrams; `PEERS.md`; **ask once to speak with** a useful peer before answering alone when their lens fits the task; disclosed peer use, single ask |
 
 Also:
@@ -407,13 +403,13 @@ each names what to search and which data; group by question type when helpful.
 without current information, research first. Rather search once more than
 fabricate from training data. Required in `skill-template.md`; do not drop it.
 
-## Phase 4 — Validation (Nuwa + scorecard)
+## Phase 4 — Validation + scorecard
 
 1. Run `python3 scripts/quality_check.py <SKILL.md>`. Fix FAILs.
 2. Independent answerer (engram folder only, no web) vs independent
    judge using `references/fidelity-scorecard.md` (stance 30, style 20,
    edge 20, source 15, structure 15). Write `FIDELITY.md`.
-3. Pass table (Nuwa):
+3. Pass table:
 
 | Check | Pass | Fail signal |
 |---|---|---|
@@ -432,7 +428,7 @@ fabricate from training data. Required in `skill-template.md`; do not drop it.
 Informed CTT only / no deceptive relative tests: run CTT only if they
 name an evaluator and 07 exists.
 
-## Phase 5 — Dual-agent refine (Nuwa)
+## Phase 5 — Dual-agent refine
 
 After a passing scorecard, two parallel passes:
 
@@ -460,7 +456,7 @@ Phase 4 has the quantified bars. Tie-breakers: **long-form > quotes**;
 
 ## Anti-patterns (never)
 
-Nuwa's ten, then Engram extras. Each row is a veto, not a vibe.
+Core ten, then Engram extras. Each row is a veto, not a vibe.
 
 | # | Anti-pattern | Why / instead |
 |---|---|---|
@@ -476,7 +472,7 @@ Nuwa's ten, then Engram extras. Each row is a veto, not a vibe.
 | 10 | Turn checkpoints into delivery blocks | Phase 0 gets defaults. 1.5 and 2.5 pause unless `waiver: run-through` |
 | 11 | Pirate book download (Z-Library / LibGen / equivalent) | Intentional cut I1. User-supplied or legal copies only |
 | 12 | Write to `.claude/skills/` | I2. Write only under `~/.tink/skills/engrams/<slug>/` |
-| 13 | Mutate `huashu-nuwa` | Never edit huashu-nuwa; fork stays read-only |
+| 13 | Edit this distiller mid-run without a version bump | Treat the pack as read-stable during a distill; change it between runs |
 | 14 | Deceptive Character Turing Test | Informed CTT only / no deceptive relative tests |
 | 15 | Fill childhood / grief from prior or "texture" | Unrecorded when no MEMORY trace (false-memory veto) |
 | 16 | Accent / trauma costume | Voice is diction and attention, not a cartoon of pain |
@@ -491,7 +487,7 @@ allowlist, obscure, distill yourself).
 ## Stage 8 — Stakes (skin in the game / why / productive urgency)
 
 Only after a mind engram ships (G7-class quality). Does **not** count
-toward Nuwa process parity. Does **not** block shipping the mind — but
+for process completeness. Does **not** block shipping the mind — but
 it is the natural next hill: make the advisor **invoke** why it exists,
 not float as a clever abstract model deck.
 

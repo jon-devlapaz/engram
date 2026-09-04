@@ -1,6 +1,6 @@
 # Extraction framework
 
-> From raw corpus to runnable mental models. Faithful English port of Nuwa's
+> From raw corpus to runnable mental models.
 > `references/extraction-framework.md`. Read this in Phase 2 before synthesis.
 > Do not skip it. Do not improvise a lighter method.
 
@@ -130,7 +130,7 @@ Wrong: pick a side, invent a reconciliation, pretend the clash is not there.
 
 ## 7. Additive: memory-trace admission (engram only)
 
-Nuwa stops at mind + voice. Engram also admits **memories**. A candidate
+Beyond mind + voice, Engram also admits **memories**. A candidate
 trace enters `MEMORY.md` only if it passes the four documentary tests
 (specificity, reactivation, sufficiency, necessity) in `CONSTITUTION.md`.
 This section does not replace §1–6. Thin or invented episodes fail here
