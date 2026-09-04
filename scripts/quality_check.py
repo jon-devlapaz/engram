@@ -13,6 +13,41 @@ import sys
 from pathlib import Path
 
 
+
+def check_frontmatter_description(content: str) -> tuple[bool, str]:
+    """Hard fail if description >1024 chars; note if >400 (still PASS)."""
+    fm = re.match(r"^---\s*\n(.*?)\n---\s*\n", content, re.DOTALL)
+    if not fm:
+        return True, "no YAML frontmatter (skip)"
+    body = fm.group(1)
+    lines = body.splitlines()
+    desc_lines: list[str] = []
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        if re.match(r"^description:\s*", line):
+            rest = re.sub(r"^description:\s*", "", line)
+            if rest in ("|", ">-", ">", "|-", "|+") or rest.startswith("|") or rest.startswith(">"):
+                i += 1
+                while i < len(lines) and (lines[i].startswith(" ") or lines[i].startswith("\t")):
+                    desc_lines.append(lines[i].strip())
+                    i += 1
+                continue
+            desc_lines.append(rest.strip().strip('"').strip("'"))
+            i += 1
+            continue
+        i += 1
+    if not desc_lines:
+        return True, "no description key (skip)"
+    desc = " ".join(desc_lines).strip()
+    n = len(desc)
+    if n > 1024:
+        return False, f"description length: {n} FAIL (hard ceiling 1024)"
+    if n > 400:
+        return True, f"description length: {n} PASS (warn: soft target ~300)"
+    return True, f"description length: {n} PASS"
+
+
 def check_mental_models(content: str) -> tuple[bool, str]:
     models = re.findall(
         r"^###\s+(?:Model|Mental model|模型|心智模型)\s*\d",
@@ -78,10 +113,12 @@ def check_expression_dna(content: str) -> tuple[bool, str]:
 
 
 def check_honest_boundary(content: str) -> tuple[bool, str]:
+    # Single-line heading only — DOTALL + .* previously matched "Source" inside
+    # URLs like ".../resources/..." across the whole file.
     m = re.search(
-        r"(?:##\s+.*(?:Honest boundary|诚实边界))(.*?)(?=\n##\s|\Z)",
+        r"^##\s+[^\r\n]*\b(?:Honest boundary|诚实边界)\b[^\r\n]*\n(.*?)(?=\n##\s|\Z)",
         content,
-        re.DOTALL | re.IGNORECASE,
+        re.DOTALL | re.MULTILINE | re.IGNORECASE,
     )
     if not m:
         return False, "FAIL no Honest boundary section"
@@ -108,10 +145,11 @@ def _count_list_items(block: str) -> int:
 
 
 def check_primary_sources(content: str) -> tuple[bool, str]:
+    # Word-boundary Sources?/References? on one heading line only (not "resources" in URLs).
     m = re.search(
-        r"(?:##\s+.*(?:Source|Reference|来源))(.*?)(?=\n##\s|\Z)",
+        r"^##\s+[^\r\n]*\b(?:Sources?|References?|来源)\b[^\r\n]*\n(.*?)(?=\n##\s|\Z)",
         content,
-        re.DOTALL | re.IGNORECASE,
+        re.DOTALL | re.MULTILINE | re.IGNORECASE,
     )
     if not m:
         return True, "no sources section (skip)"
@@ -219,6 +257,7 @@ def main(argv: list[str] | None = None) -> int:
         return 1
     content = skill_path.read_text(encoding="utf-8")
     checks = [
+        ("frontmatter description", check_frontmatter_description),
         ("mental model count", check_mental_models),
         ("model limitations", check_limitations),
         ("expression DNA", check_expression_dna),

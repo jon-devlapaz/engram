@@ -1,5 +1,12 @@
 # Changelog — Engram
 
+## 2.7.7 — quality_check Sources heading swallow (2026-09-04)
+
+- Fix greedy `re.DOTALL` + `Source` matching inside URLs like `.../resources/...`
+  (Ada Lovelace dogfood): Sources/Honest-boundary headings are single-line + word-boundary.
+- `download_subtitles.sh`: detect new captcha via `-newer MARKER` (not `-mmin -1`).
+- `quality_check`: frontmatter `description` length — FAIL >1024, note >400.
+
 ## 2.7.6 — Happy-path bootstrap + Gemini dogfood fixes (2026-09-04)
 
 - Add `references/happy-path.md`; README + SKILL Phase 0/0.5 point at it
