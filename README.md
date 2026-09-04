@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Version** | 2.5.5 |
+| **Version** | 2.5.6 |
 | **License** | MIT (`LICENSE`) |
 
 ## Install
@@ -21,6 +21,22 @@ Place this tree where your agent loads skills (example: `<skills-root>/engram/`)
 python3 scripts/merge_research.py path/to/engrams/<slug>
 python3 scripts/quality_check.py path/to/engrams/<slug>/SKILL.md
 ```
+
+## Recommended helpers
+
+For **max-quality** Phase 1 corpora, install skills (any brand) that cover
+these jobs — see `references/info-gathering-skills.md`:
+
+| Job | Why it matters |
+|---|---|
+| Video → transcript | Local video without captions |
+| Full-article reader | Real pages, not search snippets |
+| Multi-platform gatherer | X / Reddit / YouTube fragments |
+| Structured deep research | Depth on one dimension |
+| PDF text extraction | User-supplied books / papers |
+
+Engram still runs without them; corpus quality drops. Prefer installing
+before a standard or deep distill.
 
 ## What ships in this pack
 

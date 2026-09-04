@@ -1,5 +1,11 @@
 # Changelog — Engram
 
+## 2.5.6 — recommended Phase 1 helpers (2026-09-04)
+
+Info-gathering skills reframed as recommended installs for max-quality
+distills (not optional parity leftovers). Missing helper → tell the user
+what to install; still never skip a ledger.
+
 ## 2.5.5 — machine-agnostic paths (2026-09-04)
 
 Replaced host-specific skills-home paths with `<skills-root>/…`.
