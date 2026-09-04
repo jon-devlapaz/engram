@@ -25,7 +25,7 @@ Memory is additive and admission-gated.
 | 0B | `references/vague-need.md` | No-name demand → candidate cards |
 | 1 / scenarios | `references/special-scenarios.md` | Living/historical, China allowlist, obscure, self-distill |
 | 1 / tools | `references/info-gathering-skills.md` + `helpers/*/SKILL.md` | Nested Phase-1 helper skills (shipped in-tree) |
-| before 1 / doctor | `scripts/engram_doctor.py` + `helpers/doctor/SKILL.md` | Preflight CLIs/helpers; troubleshooting wizards on WARN/FAIL |
+| before 1 / gate | `scripts/phase1_gate.py` (+ doctor / `helpers/doctor/SKILL.md`) | Spawn gate: doctor blockers + url-cache; wizards on WARN/FAIL |
 | 1.5 | `scripts/merge_research.py` | Empirical review table |
 | 2 | `references/extraction-framework.md` | Triple verification, DNA, contradictions |
 | 3 | `references/skill-template.md` | Runtime skeleton |
@@ -160,8 +160,11 @@ happen. The folder must be self-contained.
       (relative to this Engram pack). Record absolute pack path as
       `ENGRAM_PACK=` for spawn prompts.
 - [ ] Create `<engram>/sources/url-cache/` (shared fetch-once across agents).
-- [ ] Preflight: run `python3 scripts/engram_doctor.py` (and `--json` if
-      scripting). **Do not spawn Phase 1 while `blocker_fails > 0`.**
+- [ ] Preflight: run `python3 scripts/phase1_gate.py --engram <dir>`
+      (optional `--mkdir-cache`). Gate runs doctor and requires
+      `sources/url-cache/`; **exit non-zero if `blocker_fails > 0` or
+      cache missing — do not spawn Phase 1.** Doctor alone:
+      `python3 scripts/engram_doctor.py` (and `--json` if scripting).
       Open `helpers/doctor/SKILL.md` and clear blockers first. Optional
       warns may proceed only with **labeled gaps** in run notes (e.g.
       agent-reach CLI missing → Jina/yt-dlp fallback).

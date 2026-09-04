@@ -54,10 +54,18 @@ python3 "$ENGRAM_PACK/scripts/srt_to_transcript.py" <input.srt> <engram>/sources
 Before Phase 1 spawn (and after mid-run helper failure):
 
 ```bash
+# Preferred gate (doctor + url-cache; exit 0 only when safe to spawn)
+python3 "$ENGRAM_PACK/scripts/phase1_gate.py" --engram "<engram-dir>"
+# optional: --mkdir-cache
+
+# Doctor alone (scripting / wizards)
 python3 "$ENGRAM_PACK/scripts/engram_doctor.py"
 python3 "$ENGRAM_PACK/scripts/engram_doctor.py" --json
 ```
 
+- **Gate:** `phase1_gate.py` runs doctor and requires
+  `<engram>/sources/url-cache/` (create with `--mkdir-cache`). Exit 0
+  only when safe to spawn Phase 1.
 - Checks nested `helpers/*/SKILL.md`, pack scripts, and host CLIs.
 - **Blockers:** `python3`, `yt-dlp`, missing helper/script files → exit 1.
   **Do not spawn Phase 1 while `blocker_fails > 0`.**

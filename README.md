@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Version** | 2.7.3 |
+| **Version** | 2.7.4 |
 | **License** | MIT (`LICENSE`) |
 
 ## Install

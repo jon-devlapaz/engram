@@ -1,5 +1,12 @@
 # Changelog — Engram
 
+## 2.7.4 — Phase 1 spawn gate (2026-09-04)
+
+- Add `scripts/phase1_gate.py`: runs doctor, requires `--engram` +
+  `sources/url-cache/` (optional `--mkdir-cache`); exit 0 only when safe
+  to spawn Phase 1 (`blocker_fails == 0` and cache present).
+- Wire gate into SKILL.md Phase 0.5 checklist and info-gathering Preflight.
+
 ## 2.7.3 — Jung postmortem surgical process (2026-09-04)
 
 - Hard doctor gate: no Phase 1 spawn while `blocker_fails > 0`.
