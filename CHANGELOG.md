@@ -1,5 +1,18 @@
 # Changelog — Engram
 
+## 2.7.5 — AX hill-climb quality gates (2026-09-04)
+
+- Doctor: optional `--engram`; url-cache-process **PASS** when
+  `sources/url-cache/` has ≥1 `*.md` (warn + enable-url-cache if empty;
+  pack-only doctor keeps info warn).
+- `phase1_gate.py` passes `engram=` into `run_checks` so Jung smoke shows
+  url-cache PASS not WARN.
+- Add `scripts/ax_gate.py` (pack A–E; optional engram F–J) and
+  `references/ax-ops.md` (STATUS schema, AX beat, hard verbs, machine-down,
+  INDEX + stub quarantine).
+- SKILL.md: STATUS.md at 0.5; **approve | revise | stop** at 1.5/2.5;
+  AX beats after 1.5/2.5/4/G8; machine-down failure row; ax_gate on Done.
+
 ## 2.7.4 — Phase 1 spawn gate (2026-09-04)
 
 - Add `scripts/phase1_gate.py`: runs doctor, requires `--engram` +

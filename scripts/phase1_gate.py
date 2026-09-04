@@ -62,7 +62,7 @@ def main(argv: list[str] | None = None) -> int:
 
         doctor = _load_doctor()
         pack = doctor.resolve_pack(args.pack)
-        checks = doctor.run_checks(pack)
+        checks = doctor.run_checks(pack, engram=engram)
         wizards = doctor.next_wizards(checks)
         doctor.print_human(pack, checks, wizards)
 

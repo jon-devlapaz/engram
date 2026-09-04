@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Version** | 2.7.4 |
+| **Version** | 2.7.5 |
 | **License** | MIT (`LICENSE`) |
 
 ## Install
@@ -18,7 +18,9 @@ Place this tree where your agent loads skills (example: `<skills-root>/engram/`)
 3. Write distilled outputs to `engrams/<slug>/`.
 
 ```bash
-python3 scripts/engram_doctor.py          # preflight (helpers + CLIs)
+python3 scripts/engram_doctor.py --engram path/to/engrams/<slug>
+python3 scripts/phase1_gate.py --engram path/to/engrams/<slug>
+python3 scripts/ax_gate.py --engram path/to/engrams/<slug>
 python3 scripts/merge_research.py path/to/engrams/<slug>
 python3 scripts/quality_check.py path/to/engrams/<slug>/SKILL.md
 ```
@@ -48,7 +50,7 @@ SKILL.md            # Distiller
 CONSTITUTION.md     # Non-negotiables
 helpers/            # Nested Phase-1 skills (video, article, reach, research, pdf, doctor)
 references/         # Phase refs (template, scorecard, scenarios, …)
-scripts/            # engram_doctor, merge_research, quality_check, captions, srt clean
+scripts/            # doctor, phase1_gate, ax_gate, merge_research, quality_check, captions
 LICENSE VERSION CHANGELOG.md README.md
 ```
 

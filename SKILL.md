@@ -26,6 +26,7 @@ Memory is additive and admission-gated.
 | 1 / scenarios | `references/special-scenarios.md` | Living/historical, China allowlist, obscure, self-distill |
 | 1 / tools | `references/info-gathering-skills.md` + `helpers/*/SKILL.md` | Nested Phase-1 helper skills (shipped in-tree) |
 | before 1 / gate | `scripts/phase1_gate.py` (+ doctor / `helpers/doctor/SKILL.md`) | Spawn gate: doctor blockers + url-cache; wizards on WARN/FAIL |
+| 0.5 / AX | `references/ax-ops.md` + `scripts/ax_gate.py` | STATUS.md, AX beats, hard checkpoint verbs, machine-down |
 | 1.5 | `scripts/merge_research.py` | Empirical review table |
 | 2 | `references/extraction-framework.md` | Triple verification, DNA, contradictions |
 | 3 | `references/skill-template.md` | Runtime skeleton |
@@ -61,6 +62,9 @@ Pause after the research table and after the synthesis summary unless
 the user already gave an explicit run-through waiver (they said "run
 through", "don't stop at checkpoints", or "skip the gates"). Record
 `waiver: run-through` once in the 0.5 notes. Anything vaguer → pause.
+Checkpoint widget/options must be exactly **approve | revise | stop**
+(see `references/ax-ops.md`). Dismiss/skip ≠ approve; bare "proceed"
+is not approve unless the user names the phase.
 
 ## Phase 0 — Eligibility and clarifying
 
@@ -174,6 +178,16 @@ happen. The folder must be self-contained.
       subject has copyrighted primaries (CW, Red Book, memoirs), ask
       once for user-supplied legal files before Phase 1 deep gather —
       do not invent access. Pure-web mind still ships without them.
+- [ ] Create `STATUS.md` skeleton (overwrite-in-place single truth —
+      phase / fidelity / stakes / gate / I1). Schema:
+      `references/ax-ops.md`.
+- [ ] Create `sources/INDEX.md` (primary / secondary / stub). Quarantine
+      CAPTCHA stubs to `sources/stubs/` (never leave under `articles/`).
+- [ ] AX quality: `python3 scripts/ax_gate.py` (pack) then, once the
+      engram tree exists, `python3 scripts/ax_gate.py --engram <dir>`.
+      Exit non-zero on FAIL — fix before calling the run healthy.
+      Doctor with engram: `python3 scripts/engram_doctor.py --engram <dir>`
+      (url-cache PASS when nonempty).
 
 ## Phase 1 — Six-agent corpus
 
@@ -385,21 +399,28 @@ sources. Full blacklist + Chinese outlet allowlist:
 | Agent conflict | Keep it | Unresolved tensions |
 | Duplicate URL / re-deep-research | Reuse `url-cache/` + spine note | Re-spawn only the thin ledger |
 | Doctor blocker_fails > 0 | Walk wizards; re-doctor | Do not spawn |
+| Machine-down (ListMachines empty / Shell unavailable) | Show machine-down card (`references/ax-ops.md`); reconnect host | Resume from `STATUS.md` phase — do not re-spawn Phase 1 blindly |
 
 Prefer a labeled 60 to a fabricated 90.
 
 ### Phase 1.5 checkpoint — PAUSE
 
 Run `python3 scripts/merge_research.py <engram-dir>` and show the table
-(source counts, primary share, holes, contradictions).
+(source counts, primary share, holes, contradictions). Update
+`STATUS.md`. Emit an **AX beat** (5 lines per `references/ax-ops.md`):
+append to `PARITY-RUN.md` + SendToUser.
 
-**Stop.** Ask: research OK to synthesize, or supplement a thin ledger?
-Start Phase 2 only after they answer, unless `waiver: run-through` is
-already recorded. Garbage in, garbage out — this gate exists so Phase 4
-is not where you discover empty ledgers.
+**Hard stop.** Present widget/options with verbs exactly
+**approve | revise | stop** (not vague "proceed").
+- `approve` → start Phase 2
+- `revise` → they name a weak ledger; re-research, re-merge, pause again
+- `stop` → halt distill
 
-If they name a weak ledger, research that slice again, re-run merge,
-then pause here once more.
+Dismiss/skip ≠ approve. Do not treat bare "proceed" / "continue" as
+approve unless they name the phase ("approve Phase 1.5"). Start Phase 2
+only after `approve`, unless `waiver: run-through` is already recorded.
+Garbage in, garbage out — this gate exists so Phase 4 is not where you
+discover empty ledgers.
 
 ## Phase 2 — Synthesis (must read the framework)
 
@@ -425,12 +446,21 @@ Write `MIND.md`, `PERSON.md`, `MEMORY.md`, `RELATIONSHIPS.md`.
 ### Phase 2.5 checkpoint — PAUSE
 
 Show: model names (3–7), heuristic count, three DNA features, tensions,
-boundary line count, admitted-trace count.
+boundary line count, admitted-trace count. Update `STATUS.md`. Emit an
+**AX beat** (5 lines per `references/ax-ops.md`): append to
+`PARITY-RUN.md` + SendToUser.
 
-**Stop.** Ask: models OK to build the runtime skill, or revise Phase 2?
-Start Phase 3 only after they answer, unless `waiver: run-through` is
-already recorded. Synthesis is the most subjective step — write the
-runtime skill on confirmed lenses.
+**Hard stop.** Present widget/options with verbs exactly
+**approve | revise | stop** (not vague "proceed").
+- `approve` → start Phase 3
+- `revise` → stay in Phase 2; patch models/DNA, then pause again
+- `stop` → halt distill
+
+Dismiss/skip ≠ approve. Do not treat bare "proceed" / "continue" as
+approve unless they name the phase ("approve Phase 2.5"). Start Phase 3
+only after `approve`, unless `waiver: run-through` is already recorded.
+Synthesis is the most subjective step — write the runtime skill on
+confirmed lenses.
 
 ## Phase 3 — Runtime skill
 
@@ -531,6 +561,9 @@ fabricate from training data. Required in `skill-template.md`; do not drop it.
    register if 07 exists). Veto overrides an A.
 5. Iterate Phase 2→4 at most twice, then ship with holes labeled.
 6. Show the scorecard and ask for confirmation before calling it done.
+7. Update `STATUS.md` (fidelity). Emit an **AX beat** after Phase 4
+   (template in `references/ax-ops.md`). Re-run
+   `python3 scripts/ax_gate.py --engram <dir>` before calling Done.
 
 Informed CTT only / no deceptive relative tests: run CTT only if they
 name an evaluator and 07 exists.
@@ -576,7 +609,7 @@ Core ten, then Engram extras. Each row is a veto, not a vibe.
 | 7 | Start the swarm without a tier | Full distill is a heavy job. They pick fast / standard / deep first |
 | 8 | Distill a living private person without a boundary | User-supplied corpus + consent |
 | 9 | Ship without anti-drift | Role-play rules + expression DNA in the template must survive edits |
-| 10 | Turn checkpoints into delivery blocks | Phase 0 gets defaults. 1.5 and 2.5 pause unless `waiver: run-through` |
+| 10 | Turn checkpoints into delivery blocks | Phase 0 gets defaults. 1.5 and 2.5 pause with **approve\|revise\|stop** unless `waiver: run-through` |
 | 11 | Unauthorized book acquisition | Intentional cut I1. User-supplied or legal copies only |
 | 12 | Write to `.claude/skills/` | I2. Write only under `<skills-root>/engrams/<slug>/` |
 | 13 | Edit this distiller mid-run without a version bump | Treat the pack as read-stable during a distill; change it between runs |
@@ -620,6 +653,8 @@ not float as a clever abstract model deck.
 - [ ] Stakes probe PASS (urgency without invented pathos; Unrecorded
       where corpus is silent)
 - [ ] Soft immersion not smuggled in as a substitute for stakes
+- [ ] `STATUS.md` updated (`stakes: G8 PASS`); **AX beat** appended
+      (`references/ax-ops.md`) + SendToUser
 
 **Immersion / CTT:** see `references/optional-immersion.md` (opt-in only,
 user-supplied, informed CTT, empty 07 fine).
@@ -627,10 +662,11 @@ user-supplied, informed CTT, empty 07 fine).
 ## Done
 
 Self-contained `<skills-root>/engrams/<slug>/`: ledgers 01–06,
-template-complete SKILL.md, `FIDELITY.md`, `quality_check.py` PASS,
-ceiling **mind** by default; writes confined to that folder (+ this chat).
-Mind ships at G7; Stage 8 (stakes) is the next hill. Immersion / CTT
-only if separately requested with corpus.
+template-complete SKILL.md, `FIDELITY.md`, `STATUS.md`, `quality_check.py`
+PASS, `python3 scripts/ax_gate.py --engram <dir>` PASS, ceiling **mind**
+by default; writes confined to that folder (+ this chat). Mind ships at
+G7; Stage 8 (stakes) is the next hill. Immersion / CTT only if
+separately requested with corpus.
 
 ## Version self-check (silent)
 

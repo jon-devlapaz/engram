@@ -68,7 +68,7 @@ def resolve_pack(explicit: str | None) -> Path:
     return Path(__file__).resolve().parent.parent
 
 
-def run_checks(pack: Path) -> list[dict[str, Any]]:
+def run_checks(pack: Path, engram: Path | None = None) -> list[dict[str, Any]]:
     checks: list[dict[str, Any]] = []
 
     # --- Pack helpers ---
@@ -371,20 +371,50 @@ def run_checks(pack: Path) -> list[dict[str, Any]]:
             )
         )
 
-    # --- url-cache process note (warn + wizard) ---
-    checks.append(
-        check(
-            id="url-cache-process",
-            title="URL cache process",
-            status="warn",
-            severity="info",
-            detail=(
-                "Prefer fetch-once into sources/url-cache/ for repeated URLs "
-                "(enable-url-cache wizard). Not a host install check."
-            ),
-            wizard="enable-url-cache",
+    # --- url-cache process (PASS when engram cache nonempty) ---
+    if engram is not None:
+        cache_dir = Path(engram).expanduser().resolve() / "sources" / "url-cache"
+        md_files = sorted(cache_dir.glob("*.md")) if cache_dir.is_dir() else []
+        if md_files:
+            checks.append(
+                check(
+                    id="url-cache-process",
+                    title="URL cache process",
+                    status="pass",
+                    severity="info",
+                    detail=f"{len(md_files)} cached *.md in {cache_dir}",
+                    wizard=None,
+                )
+            )
+        else:
+            checks.append(
+                check(
+                    id="url-cache-process",
+                    title="URL cache process",
+                    status="warn",
+                    severity="info",
+                    detail=(
+                        f"sources/url-cache/ missing or empty under {engram} — "
+                        "prefer fetch-once into url-cache for repeated URLs"
+                    ),
+                    wizard="enable-url-cache",
+                )
+            )
+    else:
+        checks.append(
+            check(
+                id="url-cache-process",
+                title="URL cache process",
+                status="warn",
+                severity="info",
+                detail=(
+                    "Prefer fetch-once into sources/url-cache/ for repeated URLs "
+                    "(enable-url-cache wizard). Pack-only doctor — pass --engram "
+                    "to verify cache. Not a host install check."
+                ),
+                wizard="enable-url-cache",
+            )
         )
-    )
 
     return checks
 
@@ -456,10 +486,18 @@ def main(argv: list[str] | None = None) -> int:
             default=None,
             help="Engram pack root (default: parent of scripts/)",
         )
+        parser.add_argument(
+            "--engram",
+            default=None,
+            help="Optional engram directory (url-cache PASS when nonempty)",
+        )
         args = parser.parse_args(argv)
 
         pack = resolve_pack(args.pack)
-        checks = run_checks(pack)
+        engram_path = (
+            Path(args.engram).expanduser().resolve() if args.engram else None
+        )
+        checks = run_checks(pack, engram=engram_path)
         wizards = next_wizards(checks)
 
         if args.json:
