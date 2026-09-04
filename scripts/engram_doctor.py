@@ -286,18 +286,37 @@ def run_checks(pack: Path) -> list[dict[str, Any]]:
     # --- gemini SDK + API key (optional warn) ---
     has_genai = _can_import("google.genai")
     has_generativeai = _can_import("google.generativeai")
+    # Prefer process env; also accept helpers/gemini-video/.env (local, gitignored)
     key_set = bool(os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY"))
+    env_file = pack / "helpers" / "gemini-video" / ".env"
+    if not key_set and env_file.is_file():
+        try:
+            for line in env_file.read_text().splitlines():
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                k, _, v = line.partition("=")
+                if k.strip() in ("GEMINI_API_KEY", "GOOGLE_API_KEY") and v.strip():
+                    key_set = True
+                    break
+        except OSError:
+            pass
     sdk_ok = has_genai or has_generativeai
     if sdk_ok and key_set:
         sdk_name = "google.genai" if has_genai else "google.generativeai"
-        key_name = "GEMINI_API_KEY" if os.environ.get("GEMINI_API_KEY") else "GOOGLE_API_KEY"
+        if os.environ.get("GEMINI_API_KEY"):
+            key_src = "GEMINI_API_KEY env"
+        elif os.environ.get("GOOGLE_API_KEY"):
+            key_src = "GOOGLE_API_KEY env"
+        else:
+            key_src = "helpers/gemini-video/.env"
         checks.append(
             check(
                 id="gemini",
                 title="Gemini SDK + API key",
                 status="pass",
                 severity="optional",
-                detail=f"{sdk_name} import OK; {key_name} set (value not shown)",
+                detail=f"{sdk_name} import OK; key via {key_src} (value not shown)",
                 wizard=None,
             )
         )

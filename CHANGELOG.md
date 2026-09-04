@@ -1,5 +1,9 @@
 # Changelog — Engram
 
+## 2.7.2 — Gemini .env for doctor (2026-09-04)
+
+Doctor accepts `helpers/gemini-video/.env` (gitignored) for API key presence.
+
 ## 2.7.1 — URL cache in Helper block (2026-09-04)
 
 enable-url-cache wired into Helper block + pre-Phase-1 checklist.

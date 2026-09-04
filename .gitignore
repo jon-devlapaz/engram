@@ -13,3 +13,8 @@ venv/
 *.swp
 *~
 .engram-tmp/
+
+# Local API keys — never commit
+helpers/gemini-video/.env
+.env
+*.env

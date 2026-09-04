@@ -51,7 +51,7 @@ This skill enables comprehensive video analysis using Google's Gemini API, inclu
 
 The skill checks for `GEMINI_API_KEY` in this order:
 1. **Process environment**: `process.env.GEMINI_API_KEY` or `$GEMINI_API_KEY`
-2. **Skill directory**: `.claude/skills/gemini-video-understanding/.env`
+2. **Skill directory**: `<ENGRAM_PACK>/helpers/gemini-video/.env` (preferred for Engram)
 3. **Project root**: `.env` file in project root
 
 To set up:
