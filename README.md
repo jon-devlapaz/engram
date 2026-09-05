@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Version** | 2.7.9 |
+| **Version** | 2.7.10 |
 | **License** | MIT (`LICENSE`) |
 
 ## Happy path

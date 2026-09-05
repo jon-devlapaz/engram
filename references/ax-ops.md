@@ -1,6 +1,6 @@
 # AX ops — Status, beats, checkpoints, machine-down
 
-Lean operator contract for Engram hill-climb **2.7.9+**. Process friction
+Lean operator contract for Engram hill-climb **2.7.10+**. Process friction
 fixes — not fidelity. See also `scripts/ax_gate.py` and
 `references/happy-path.md`.
 
@@ -17,7 +17,7 @@ Minimum schema (keys or headings; case-insensitive):
 - phase: <e.g. G8 complete | Phase 1.5 awaiting approve | …>
 - fidelity: <score/grade or n/a>
 - stakes: <G8 PASS | pending | n/a>
-- gate: <pack version that last gated, e.g. 2.7.9>
+- gate: <pack version that last gated, e.g. 2.7.10>
 - I1: <public-legal | local-first | …>
 - updated: <YYYY-MM-DD America/Chicago>
 ```

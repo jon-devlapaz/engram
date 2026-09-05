@@ -1,5 +1,10 @@
 # Changelog — Engram
 
+## 2.7.10 — CI smoke + release hygiene (2026-09-05)
+
+- Add `.github/workflows/smoke.yml`: run `scripts/test_smoke.py` on push/PR to `main`.
+- Tag/release hygiene for the 2.7.9 purify line; bootstrap dogfood stays outside the pack.
+
 ## 2.7.9 — purify (2026-09-04)
 
 - Drop audit stubs: untracked `AGENTS.md`; tracked
