@@ -54,6 +54,10 @@ that phase starts.
 - Public figure + no extra detail: public corpus, disclosed sim.
 - Private figure: halt for consent and corpus.
 - Books: user-supplied files or otherwise legal access only (I1).
+- **Deterministic vs judgment.** Scripts own structure (`quality_check`,
+  `test_smoke`, doctor / phase1_gate / ax_gate / `merge_research`). Agents
+  own taste (fidelity-scorecard, Stage 8 stakes, synthesis). Detail:
+  `references/happy-path.md`.
 
 Proceed on Phase 0 clarifying questions that have defaults.
 Halt on consent, deception, and a CTT claim with no intimate sources.
@@ -102,12 +106,11 @@ Phase 0 entry:
 | Standard (default) | All six research dimensions | Most work |
 | Deep | Six dimensions + full ingest of user primaries (+ 07 only if immersion asked + supplied) | Release-quality mind; immersion/CTT only if requested |
 
-**Before spawning agents, confirm the tier and state the cost magnitude.** A full standard distill is a long
-multi-agent research job — full standard runs can cost on the order of tens of dollars on a top model; fast runs
-about 1/3 of standard, deep costs the most. Fast is the cheap smoke test. Deep is for a
-release-quality engram with a full primary ingest. Name the tier and its magnitude before spending.
-Start the swarm only after the tier is named (default:
-standard, if they already said "just do it").
+**Before spawning agents, confirm the tier and state the cost magnitude.**
+Standard is a long multi-agent job (often tens of dollars on a top model);
+fast ≈ 1/3 of that (smoke); deep costs most (release-quality + full primary
+ingest). Name the tier before spending. Start the swarm only after the tier
+is named (default: standard if they said "just do it").
 
 **Drop vs halt (align with tier):**
 - Fast / standard, public figure, no files → **suggest**, then
@@ -135,9 +138,6 @@ If they only have a problem, read `references/vague-need.md` and
 follow that procedure (demand table → person vs topic → ≤3 candidates).
 
 ## Phase 0.5 — Create the directory before research
-
-Happy-path bootstrap: read `references/happy-path.md` (agent owns
-scripts; user consents only for host installs and checkpoints 1.5/2.5).
 
 Read `references/schema.md` and create that tree **before** any agent
 runs. Copy this skill's `CONSTITUTION.md` in. Create `STATUS.md` with
@@ -298,10 +298,9 @@ Do not skip this ledger.
 
 ### Tools
 
-Scripts live in **this pack** (`scripts/` in this pack), not inside each
-output engram. Invoke them from this skill directory (or with
-an absolute path to that `scripts/` folder). Prefer English captions
-first (English runtime).
+Scripts live in **this pack** (`scripts/`), not inside each output engram.
+Invoke from this skill directory (or absolute path). Prefer English
+captions first (English runtime).
 
 - **Books:** copy user-supplied or legally obtained files into
   `sources/books/` and read them. User-supplied or otherwise legal access only (I1). If a book is needed and not supplied, leave ledger 01 thin
@@ -310,18 +309,14 @@ first (English runtime).
   then `python3 scripts/srt_to_transcript.py <input.srt> <sources/transcripts/…>`
 - **Podcasts:** search for published transcripts (e.g. podcastnotes.org
   and the show's own site) before relying on captions.
-- Phase 1.5: `python3 scripts/merge_research.py --engram <engram-dir>`
-- Phase 4: `python3 scripts/quality_check.py --engram <engram-dir>`
-  (positional `<dir>` / `<SKILL.md>` still accepted for backward compat)
+- CLI: prefer `--engram <dir>`; positional still accepted. Phase 1.5 /
+  Phase 4 invoke `merge_research` / `quality_check` in those sections.
 
-#### Nested info-gathering skills (hard bind)
+#### Nested helpers (hard bind)
 
-1. Read `references/info-gathering-skills.md` (routing + triggers).
-2. Set `ENGRAM_PACK` to this pack’s absolute path.
-3. Paste the **Helper block** into **every** Phase 1 agent prompt (see
-   template above). Do not spawn without it.
-4. Helper missing/broken ≠ skip ledger; fall back and note the gap. I1
-   still binds.
+Same rules as **Helpers + routing** above: `ENGRAM_PACK`, Helper block in
+every spawn, fall back on helper failure, I1 binds.
+`references/info-gathering-skills.md`.
 
 ### Source priority
 
@@ -356,13 +351,11 @@ Prefer a labeled 60 to a fabricated 90.
 
 Run `python3 scripts/merge_research.py --engram <engram-dir>` and show
 the table (source counts, primary share, holes, contradictions). Update
-`STATUS.md`. Emit an **AX beat** and hard-stop with **approve | revise |
-stop** per `references/ax-ops.md` (dismiss ≠ approve; bare "proceed" is
-not approve unless the phase is named). Start Phase 2 only after
-`approve`, unless `waiver: run-through` is recorded.
+`STATUS.md`. AX beat + **approve | revise | stop** per `references/ax-ops.md`
+(verb rules in Defaults). Start Phase 2 only after `approve`, unless
+`waiver: run-through` is recorded.
 - `approve` → Phase 2 · `revise` → re-research thin ledger · `stop` → halt
-Garbage in, garbage out — this gate exists so Phase 4 is not where you
-discover empty ledgers.
+This gate exists so Phase 4 is not where you discover empty ledgers.
 
 ## Phase 2 — Synthesis (must read the framework)
 
@@ -389,12 +382,10 @@ Write `MIND.md`, `PERSON.md`, `MEMORY.md`, `RELATIONSHIPS.md`.
 
 Show: model names (3–7), heuristic count, three DNA features, tensions,
 boundary line count, admitted-trace count. Update `STATUS.md`. AX beat +
-**approve | revise | stop** per `references/ax-ops.md` (same verb rules
-as 1.5 / Defaults). Start Phase 3 only after `approve`, unless
-`waiver: run-through` is recorded.
+**approve | revise | stop** per `references/ax-ops.md` (Defaults verbs).
+Start Phase 3 only after `approve`, unless `waiver: run-through`.
 - `approve` → Phase 3 · `revise` → patch models/DNA · `stop` → halt
-Synthesis is the most subjective step — write the runtime skill on
-confirmed lenses.
+Synthesis is the most subjective step — write the runtime on confirmed lenses.
 
 ## Phase 3 — Runtime skill
 
@@ -457,24 +448,21 @@ rules: `references/agentic-protocol.md`.
 
 ### Agentic Protocol generation
 
-**Why / where:** engram *works* like them (research before vibe). Fill
-the Answer-workflow skeleton in `references/skill-template.md` after
-role-playing rules, before the identity card.
-
-**Shape:** three steps; Step 2 tracks from *this* subject's models.
-Derive by inverting models into what they inspect. Calibration
-(Munger / Feynman / Taleb / MrBeast) + paper exercise:
-`references/agentic-protocol.md` — prefer subject-specific tracks over
-pasting those rows.
-
-**Constraints:** tracks from models (not "search related information");
-each names what to search and which data; group by question type when helpful.
+Fill the Answer-workflow skeleton in `references/skill-template.md` after
+role-playing rules (research-before-vibe). Three steps; Step 2 tracks from
+*this* subject's models (invert models → what they inspect). Calibration +
+paper exercise: `references/agentic-protocol.md` — prefer subject-specific
+tracks over pasting example rows. Tracks name what to search and which data
+(not vague "search related information").
 
 **Judgment call (ship in Step 1):** if the answer would be materially worse
-without current information, research first. Rather search once more than
-fabricate from training data. Required in `skill-template.md`; do not drop it.
+without current information, research first. Prefer one more search over
+fabricating from training data. Required in `skill-template.md`.
 
 ## Phase 4 — Validation + scorecard
+
+**Deterministic:** `quality_check` / `test_smoke` / `ax_gate` (structure).
+**Judgment:** fidelity-scorecard + Stage 8 stakes (taste). Do not confuse them.
 
 1. Run `python3 scripts/quality_check.py --engram <dir>`. Fix FAILs.
 2. Independent answerer (engram folder only, no web) vs independent
@@ -500,8 +488,6 @@ fabricate from training data. Required in `skill-template.md`; do not drop it.
    `python3 scripts/ax_gate.py --engram <dir>` before Done.
 8. Pack regression (maintainers): `python3 scripts/test_smoke.py`.
 
-Immersion / CTT: opt-in only — `references/optional-immersion.md`.
-
 ## Phase 5 — Dual-agent refine
 
 After a passing scorecard, two parallel passes:
@@ -515,8 +501,8 @@ After a passing scorecard, two parallel passes:
   failure prevention); missing facts; 2–3 concrete patches with
   after-text examples.
 
-Apply non-conflicting edits. Show a diff summary and ask for confirmation. Prefer edits that make
-the skill *run* over length alone.
+Apply non-conflicting edits. Show a diff summary and ask for confirmation.
+Prefer edits that make the skill *run* over length alone.
 
 ## Updates
 
@@ -560,10 +546,9 @@ allowlist, obscure, distill yourself).
 
 ## Stage 8 — Stakes (skin in the game / why / productive urgency)
 
-Only after a mind engram ships (G7-class quality). Does **not** count
-for process completeness. Does **not** block shipping the mind — but
-it is the natural next hill: make the advisor **invoke** why it exists,
-not float as a clever abstract model deck.
+Only after a mind engram ships (G7-class). Does **not** count for process
+completeness or block shipping the mind — natural next hill: make the
+advisor **invoke** why it exists, not float as an abstract model deck.
 
 **What stakes means here**
 - **Why-of-existence:** concrete user/job + subject's through-line that
@@ -590,15 +575,12 @@ not float as a clever abstract model deck.
 - [ ] `STATUS.md` updated (`stakes: G8 PASS`); **AX beat** appended
       (`references/ax-ops.md`)
 
-**Immersion / CTT:** `references/optional-immersion.md` (opt-in only).
-
 ## Done
 
 Self-contained `<skills-root>/engrams/<slug>/`: ledgers 01–06,
-template-complete SKILL.md, `FIDELITY.md`, `STATUS.md`, `quality_check.py`
-PASS, `python3 scripts/ax_gate.py --engram <dir>` PASS, ceiling **mind**
-by default; writes confined to that folder (+ this chat). Mind ships at
-G7; Stage 8 (stakes) is the next hill. Immersion / CTT: Defaults +
+template-complete SKILL.md, `FIDELITY.md`, `STATUS.md`, `quality_check`
+PASS, `ax_gate.py --engram <dir>` PASS; ceiling **mind** by default.
+Mind ships at G7; Stage 8 is the next hill. Immersion/CTT: Defaults +
 `optional-immersion.md`.
 
 ## Version self-check (silent)

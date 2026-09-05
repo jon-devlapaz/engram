@@ -4,8 +4,10 @@
 
 | | |
 |---|---|
-| **Version** | 2.7.10 |
+| **Version** | 3.0.0 |
 | **License** | MIT (`LICENSE`) |
+
+**v3 purity.** Distill-only northstar: canonical pack path is `engram/` (matching GitHub). Scripts own **deterministic** structure gates (`quality_check`, `test_smoke`, doctor/phase1/ax); agents own **judgment** (fidelity-scorecard, Stage 8 stakes, synthesis). No audit stubs; no vendor branding in load-bearing docs.
 
 ## Happy path
 
@@ -15,9 +17,13 @@ See `references/happy-path.md`.
 
 ## Install
 
-Place this tree where your agent loads skills (example: `<skills-root>/engram/`).
+Place this tree where your agent loads skills:
 
-`<skills-root>` is your agent's skills directory — whatever path that is on the host. Engram never assumes a vendor home folder.
+```text
+<skills-root>/engram/
+```
+
+`<skills-root>` is your agent's skills directory — whatever path that is on the host. Engram never assumes a vendor home folder. Install name is **`engram` only** (not a versioned folder name).
 
 1. Read `CONSTITUTION.md`, then `SKILL.md`.
 2. Open `references/` files as the phase table in `SKILL.md` directs.

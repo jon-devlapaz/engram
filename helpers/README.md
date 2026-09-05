@@ -9,7 +9,7 @@ Phase-1 info-gathering skills, vendored in-tree so one Engram install carries th
 | `agent-reach/` | multi-platform gather | Panniantong/Agent-Reach (MIT) |
 | `deep-research/` | structured deep research | alchaincyf/huashu-skills `huashu-research` |
 | `pdf/` | PDF/DOCX/EPUB/web → markdown | alchaincyf/huashu-md-html (MIT) |
-| `doctor/` | preflight + troubleshooting wizards | Engram-authored (2.7.0) |
+| `doctor/` | preflight + troubleshooting wizards | Engram-authored |
 
 Each folder is a skill (`SKILL.md`). Phase 1 opens `helpers/<job>/SKILL.md` — no host skills-root scan required.
 

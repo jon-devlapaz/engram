@@ -1,6 +1,6 @@
 # Happy-path agentic bootstrap
 
-Lean contract for **distill `<name>`** on Engram **2.7.10+**. The agent
+Lean contract for **distill `<name>`** on Engram **3.0.0+**. The agent
 owns scripts and the tree; the user consents only for (a) **host installs**
 and (b) **checkpoints 1.5 / 2.5** with verbs **approve | revise | stop**.
 

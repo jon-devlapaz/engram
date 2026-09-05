@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic pack regression harness (Engram 2.7.8+).
+"""Deterministic pack regression harness (Engram 3.0.0+).
 
     python3 scripts/test_smoke.py
     python3 scripts/test_smoke.py --pack <pack-root>

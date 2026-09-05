@@ -1,5 +1,22 @@
 # Changelog — Engram
 
+## 3.0.0 — purity: canonical engram, deterministic/judgment contract (2026-09-05)
+
+**BREAKING:** Retired the live `engram-v2` path name. Install and load as
+`<skills-root>/engram/` only (matches GitHub `jon-devlapaz/engram`).
+
+- Distill-only northstar: no audit stubs; no vendor branding in load-bearing
+  docs (CHANGELOG historical mentions OK).
+- First-class **deterministic vs judgment**: scripts own structure gates
+  (`quality_check`, `test_smoke`, doctor / phase1_gate / ax_gate /
+  `merge_research`); agents own fidelity-scorecard, Stage 8 stakes, and
+  synthesis. Elevated in README + SKILL Defaults / Phase 4; happy-path
+  table remains the detailed contract.
+- Version pins → **3.0.0** / **3.0.0+** across pack surface (VERSION,
+  README, happy-path, ax-ops, `test_smoke` docstring).
+- SKILL.md: keep all phases; trim pointer duplication; Phase 4 names
+  deterministic vs judgment explicitly.
+
 ## 2.7.10 — CI smoke + release hygiene (2026-09-05)
 
 - Add `.github/workflows/smoke.yml`: run `scripts/test_smoke.py` on push/PR to `main`.
